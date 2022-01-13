@@ -1,0 +1,8 @@
+.h1News {
+    text-align: center;
+}
+.divTest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

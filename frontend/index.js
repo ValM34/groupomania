@@ -16,7 +16,7 @@ let myInit = {
 
 let tableau = [];
 function fetchComments() {
-  fetch("http://localhost:3000/publications/getall", myInit)
+  fetch("http://localhost:3001/publications/getall", myInit)
     .then(response => response.json())
     .catch((error) => res.status(400).json({ error: "ERROR" }))
     .then((allComments) => {
@@ -45,14 +45,14 @@ function fetchComments() {
 
 
 
-      fetch("http://localhost:3000/publicat/getall", myInit)
+      fetch("http://localhost:3001/publicat/getall", myInit)
         .then(response => response.json())
         .catch((error) => res.status(400).json({ error: "ERROR" }))
         .then((allPublications) => {
 
 
 
-          fetch("http://localhost:3000/users/getall", myInit)
+          fetch("http://localhost:3001/users/getall", myInit)
             .then(response => response.json())
             .catch((error) => res.status(400).json({ error: "ERROR" }))
             .then((allUsers) => {
@@ -232,7 +232,7 @@ selectButtonSubmit.addEventListener("click", function (e) {
 
   function fetchSignup() {
 
-    fetch("http://localhost:3000/signup", options)
+    fetch("http://localhost:3001/signup", options)
       .then(response => response.json())
       .then((infosCommande) => {
         console.log(infosCommande);
@@ -247,7 +247,7 @@ selectButtonSubmit.addEventListener("click", function (e) {
 
         // Création de la variable qu'on va utiliser pour rentrer nos données dans le local storage
         let commandeLocalStorage = [];
-        commandeLocalStorage.push(infosSignin);
+        commandeLocalStorage.push(infosSignup); // Y avait "infosSignin", je l'ai changé en infosSignup pour voir
         localStorage.setItem("command", JSON.stringify(commandeLocalStorage));
 
 
