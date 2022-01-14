@@ -1,6 +1,5 @@
 label {
-    margin-top: 10px;
-    margin-bottom: 3px;
+    margin: 10px 20px 3px 20px;
 }
 
 input {
@@ -8,13 +7,14 @@ input {
     border-radius: 5px;
     border: none;
     font-size: 15px;
+    margin: 0px 20px;
 }
 
 input:focus {
     outline: #FEBB00 solid 2px;
 }
 
-.buttonSignup {
+.buttonSignin {
     background-color: #FEBB00;
     border: none;
     box-shadow: 0px 0px 2px #FEBB00;
@@ -24,22 +24,51 @@ input:focus {
     margin-top: 10px;
     border-radius: 5px;
     transition: background-color 250ms ease-in-out;
+    margin: 20px;
 }
-
-.buttonSignup:hover {
+.buttonSwitchSignup {
+    background-color: #FEBB00;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2b73b3;
+    border-top-left-radius: 30px;
+    transition: background-color 250ms ease-in-out;
+    width: 50%;
+    padding: 10px;
+}
+.buttonSwitchSignup:hover {
+    cursor: pointer;
+    background-color: #FFC523;
+}
+.ongletSwitchSignup {
+    background-color: #2b73b3;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFC523;
+    border-top-right-radius: 30px;
+    transition: background-color 250ms ease-in-out;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.buttonSwitchSignup:focus {
+    outline: #2b73b3 solid 2px;
+}
+.buttonSignin:hover {
     cursor: pointer;
     background-color: #FFC523;
 }
 
-.buttonSignup:focus {
+.buttonSignin:focus {
     outline: white solid 2px;
 }
 
-.containerSignup {
+.containerSignin {
     display: flex;
     flex-direction: column;
     background-color: #2b73b3;
-    padding: 20px;
     box-shadow: 0px 0px 5px #2b73b3;
     border-radius: 30px;
     color: white;
@@ -49,4 +78,7 @@ input:focus {
 .formIndex {
     display: flex;
     justify-content: center;
+}
+.divSwitchSignup {
+    display: flex;
 }

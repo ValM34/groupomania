@@ -1,6 +1,7 @@
 header {
-    background-color: blue;
+    background-color: #2b73b3;
     width: 100vw;
     display: flex;
     justify-content: center;
+    padding: 10px;
 }

@@ -17,12 +17,12 @@ function News() {
 
         let tableau = [];
         function fetchComments() {
-            try {fetch("http://localhost:3001/publications/getall")
+            try {fetch("http://localhost:3001/news/comments")
                 .then(response => response.json())
                 
                 .then((allComments) => {
 
-
+                    console.log(allComments)
 
                     let y = false;
                     for (let i = 0; i < allComments.length; i++) {
@@ -45,13 +45,13 @@ function News() {
                     }
 
 
-                    fetch("http://localhost:3001/publicat/getall")
+                    fetch("http://localhost:3001/news/publications")
                         .then(response => response.json())
                         .then((allPublications) => {
 
 
 
-                            fetch("http://localhost:3001/users/getall")
+                            fetch("http://localhost:3001/news/users")
                                 .then(response => response.json())
                                 .then((allUsers) => {
 
