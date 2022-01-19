@@ -51,4 +51,3 @@ selectButtonSubmit.addEventListener("click", function (e) {
 
 });
 let cat = JSON.parse(localStorage.getItem('commandSignin'));
-console.log(cat[0].token)

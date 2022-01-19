@@ -1,4 +1,5 @@
 const models = require('../models');
+const multer = require('../middleware/multer-config')
 
 
 
@@ -34,6 +35,10 @@ exports.getOnePublication = async (req, res, next) => {
 };
 
 exports.addPublication = async (req, res, next) => {
+
+    // test multer
+    console.log(req.body)
+    // fin test multer
     const addContent = req.body.content;
     if (!addContent) {
         return res.send(" EMPTY_PUBLICATION ");
@@ -41,6 +46,9 @@ exports.addPublication = async (req, res, next) => {
     const addPublication = await models.Publication.create({
         users_idusers: req.body.users_idusers,
         content: req.body.content,
+        // test multer
+        attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        // fin test multer
     });
 
     return res.send({
@@ -71,12 +79,11 @@ exports.updatePublication = async (req, res, next) => {
     return res.send(getUpdatedPublication);
 };
 
-// CETTE ROUTE NE FONCTIONNE PAS : JE PENSE QUE JE DOIS D'ABORD SUPPRIMER LES COMMENTAIRES ASSOCIES A CETTE ROUTE.
+// CETTE ROUTE NE FONCTIONNE PAS SI DES COMMENTAIRES SONT LIES A CELLE-CI
 exports.deletePublication = async (req, res, next) => {
     const getOnePublication = await models.Publication.findOne({
         where: { id: req.params.id, users_idusers: req.auth.users_idusers }
     })
-    console.log("salut")
     if (!getOnePublication) {
         return res.send(" ERROR ");
     }

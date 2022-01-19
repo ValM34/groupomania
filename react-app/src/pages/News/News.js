@@ -1,3 +1,4 @@
+import PublicationInput from '../../components/PublicationInput/PublicationInput';
 import NewsCss from './News.css';
 
 import { useRef, useEffect } from 'react';
@@ -17,9 +18,10 @@ function News() {
 
         let tableau = [];
         function fetchComments() {
-            try {fetch("http://localhost:3001/news/comments")
+            try {
+                fetch("http://localhost:3001/news/comments")
                 .then(response => response.json())
-                
+
                 .then((allComments) => {
 
                     console.log(allComments)
@@ -191,18 +193,22 @@ function News() {
 
                         })
 
-                })}
-                catch(err) {console.log(err)}
-                
+                })
+            }
+            catch (err) { console.log(err) }
+
         }
 
         fetchComments();
     }, [])
 
     return (
+        <div>
+            <PublicationInput />
             <div className="divTest" ref={ref}>
                 <h1 className="h1News">Dernières publications</h1>
             </div>
+        </div>
     );
 }
 

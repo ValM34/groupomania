@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
     try {
-        console.log(req.headers.authorization)
+        // console.log(req.headers.authorization)
         const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjQxNzM5MjA5LCJleHAiOjE2NDUzMzkyMDl9.35LGBUwdpUub_6pQ3IthpO5DOaNal_3VdbjZ26XBWsI"; // On sélectionne le token
         const decodedToken = jwt.verify(token, "s7UcdjHZk33fiuMhH5in4Tu27BYhz6RCKFZCY82tU858bw_KA5QxDPvyi6xYdU7x7eF4z356223MPuwMe6YZSy5hz87x5N4R5BK9XS9z6up3MG_zxVB42TF748S3VmH2tMd6y67nQq5t6j8qhy9h6T3XG"); // On vérifie que le token est correct grâce à la clef
         const users_idusers = decodedToken.userId;

@@ -4,11 +4,11 @@ const models = require('./models');
 const jwt = require('jsonwebtoken');
 const app = express();
 const bodyParser = require('body-parser');
-const apiRouter = require('./apiRouter').router;
+const path = require('path');
 
-// test jeudi 13 janvier
 const newsRoutes = require('./routes/news');
 const commentsRoutes = require('./routes/comments');
+const usersRoutes = require('./routes/users');
 
 app.use(express.json()); // Cela sert à ce que les requêtent comme "req.body" soient comprises par le serveur
 
@@ -24,11 +24,14 @@ app.use((req, res, next) => {
 });
 
 const auth = require("./middleware/auth");
+const { dirname } = require('path');
 
 // ------------------------------ Routes ------------------------------
 
-app.use('/', apiRouter);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use('/news', newsRoutes);
 app.use('/news', commentsRoutes);
+app.use('/users', usersRoutes);
 
 module.exports = app;
