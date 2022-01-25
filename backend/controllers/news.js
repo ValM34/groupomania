@@ -1,5 +1,5 @@
 const models = require('../models');
-const multer = require('../middleware/multer-config')
+const multer = require('../middleware/multer-config');
 
 
 
@@ -44,10 +44,12 @@ exports.addPublication = async (req, res, next) => {
         return res.send(" EMPTY_PUBLICATION ");
     }
     const addPublication = await models.Publication.create({
-        users_idusers: req.body.users_idusers,
+        users_idusers: req.auth.users_idusers,
         content: req.body.content,
         // test multer
+        if(filename){
         attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        }
         // fin test multer
     });
 

@@ -12,7 +12,7 @@
 }
 .containerTextareaCreatePublication {
     background-color: #2b73b3;
-    width: 30vw;
+    width: 680px;
     margin-bottom: 20px;
     padding: 30px;
     border-radius: 30px;
@@ -49,4 +49,18 @@
 }
 .inputFile {
     display: none;
+}
+.labelUploadImage {
+    color: orange;
+    font-size: 20px;
+    transition: color 250ms ease-in-out;
+}
+.labelUploadImage:hover {
+    cursor: pointer;
+    color: white;
+}
+.faImage {
+    
+    margin-right: 7px;
+    
 }

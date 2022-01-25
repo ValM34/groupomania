@@ -9,19 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    /*
     static associate(models) {
       // define association here
-      /*models.Comment.belongsTo(models.User, {
+      models.Comment.belongsTo(models.User, {
         foreignKey: {
           allowNull: false
         }
-      })*/
-      /*models.Comment.belongsTo(models.Publication, {
+      })
+      models.Comment.belongsTo(models.Publication, {
         foreignKey: {
           allowNull: false
         }
-      })*/
+      })
     }
+    */
   };
   Comment.init({
     users_idusers: DataTypes.INTEGER,

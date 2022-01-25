@@ -1,0 +1,96 @@
+.cardContainer {
+    display: flex;
+    justify-content: center;
+}
+.liPublication {
+    background-color: #2b73b3;
+    width: 680px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px #2b73b3;
+    display: flex;
+    flex-direction: column;
+}
+.textareaCreateComment {
+    height: 80px;
+    padding: 8px 0px 8px 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    width: 100%;
+    font-size: 20px;
+}
+.textareaCreateComment:focus {
+    outline: #FEBB00 solid 2px;
+}
+.nameAndSurnamePublication {
+    font-size: 20px;
+    color: #E8E8E8;
+}
+.contentPublication {
+    font-size: 20px;
+    color: white;
+}
+.containerPublication {
+    border-bottom: solid #FEBB00 2px;
+    padding-bottom: 10px;
+}
+.buttonComment {
+    background-color: #FEBB00;
+    border: none;
+    box-shadow: 0px 0px 2px #FEBB00;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2b73b3;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 250ms ease-in-out;
+    margin: 20px 0px 0px 0px;
+    padding: 5px 10px;
+    width: 100%;
+}
+.buttonComment:hover {
+    cursor: pointer;
+    background-color: #FFC523;
+}
+
+.buttonComment:focus {
+    outline: white solid 2px;
+}
+.likeButton {
+    background-color: transparent;
+    border: none;
+}
+.faThumbsUp {
+    color: white;
+    font-size: 22px;
+    transition: color 250ms ease-in-out;
+    margin-right: 5px;
+}
+.faThumbsUp:hover {
+    color: #FFC523;
+    cursor: pointer;
+}
+.faThumbsUp:active {
+    color: white;
+    cursor: pointer;
+}
+.dislikeButton {
+    background-color: transparent;
+    border: none;
+}
+.containerLikePublication {
+    display: flex;
+}
+.containerLikePublication {
+    display: flex;
+    padding: 0px 10px 5px 10px;
+    font-size: 22px;
+    color: white;
+}
+.containerComment {
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+}

@@ -12,7 +12,8 @@ exports.getAllComments = async (req, res, next) => {
 };
 
 exports.addComment = async (req, res, next) => {
-    console.log(req.auth.users_idusers);
+    console.log(req.body);
+    console.log(req.body.content)
     const addContent = req.body.content;
     if (!addContent) {
         return res.send(" EMPTY_COMMENT ");

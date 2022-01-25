@@ -1,32 +1,16 @@
 import './PublicationInput.css';
 import { useState, useRef } from 'react';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 
 function PublicationInput() {
-    /*
-    const [stateTextarea, setStateTextarea] = useState();
 
-    const linkedTextarea = (e) => {
-        setStateTextarea(e);
-    }
-
-    // test attachment 
-    const [stateImg, setStateImg] = useState();
-
-    const linkedImg = (e) => {
-        setStateImg(e);
-    }
-    // test attachment
-
-    */
-    // nouveau test attachment
-    const [id, setId] = useState('35');
     const [content, setContent] = useState('');
     const formRef = useRef(null)
 
-    const onChangeId = (evt) => {
-        setId(evt.target.value)
-    };
+
 
     const onChangeContent = (evt) => {
         setContent(evt.target.value)
@@ -35,6 +19,14 @@ function PublicationInput() {
     const onSubmit = (evt) => {
         evt.preventDefault();
         console.log(new FormData(formRef.current))
+        // Récupération du token pour l'envoyer au backend
+
+        let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+        console.log(getToken[0].token)
+
+        let myHeaders = new Headers({ 'Authorization': getToken[0].token });
+
+    
 
         if (!formRef) {
             return
@@ -42,11 +34,11 @@ function PublicationInput() {
 
         fetch(formRef.current.action, {
             method: formRef.current.method,
-            body: new FormData(formRef.current)
+            body: new FormData(formRef.current),
+            headers: myHeaders,
         })
 
     }
-    // fin nouveau test attachment
 
 
 
@@ -54,24 +46,14 @@ function PublicationInput() {
     return (
         <div className="containerFlexbox">
             
-
-
-
-
             <form className="containerFlexbox" method="POST" action="http://localhost:3001/news/publications/add" ref={formRef} onSubmit={onSubmit}>
                 <div className="containerTextareaCreatePublication">
-                        <label htmlFor="users_idusers">Id</label>
-                        <input id="users_idusers" type="text" name="users_idusers" onChange={onChangeId} value={id} />
-
-                        <textarea className="textareaCreatePublication" id="content-upload" type="text" name="content" onChange={onChangeContent} value={content} placeholder="Quoi de neuf, [Nom de la personne] ?" />
-
-                        <label htmlFor="image">Icone upload un fichier</label>
+                        <textarea className="textareaCreatePublication" id="content-upload" type="text" name="content" onChange={onChangeContent} value={content} placeholder="Quoi de neuf ?" />
+                        <label className="labelUploadImage" htmlFor="image"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter une image</label>
                         <input className="inputFile" id="image" type="file" name="image" />
                     <button className="buttonAddPublication" type="submit">Envoyer</button>
                 </div>
             </form>
-
-
 
         </div>
     )

@@ -9,6 +9,7 @@ const path = require('path');
 const newsRoutes = require('./routes/news');
 const commentsRoutes = require('./routes/comments');
 const usersRoutes = require('./routes/users');
+const likesRoutes = require('./routes/likes');
 
 app.use(express.json()); // Cela sert à ce que les requêtent comme "req.body" soient comprises par le serveur
 
@@ -33,5 +34,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/news', newsRoutes);
 app.use('/news', commentsRoutes);
 app.use('/users', usersRoutes);
+app.use('/news', likesRoutes);
 
 module.exports = app;

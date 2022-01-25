@@ -16,11 +16,11 @@ let myInit = {
 
 let tableau = [];
 function fetchComments() {
-  fetch("http://localhost:3001/publications/getall", myInit)
+  fetch("http://localhost:3001/news/publications", myInit)
     .then(response => response.json())
     .catch((error) => res.status(400).json({ error: "ERROR" }))
     .then((allComments) => {
-
+      console.log(allComments)
 
 
       let y = false;
@@ -45,14 +45,14 @@ function fetchComments() {
 
 
 
-      fetch("http://localhost:3001/publicat/getall", myInit)
+      fetch("http://localhost:3001/news/comments", myInit)
         .then(response => response.json())
         .catch((error) => res.status(400).json({ error: "ERROR" }))
         .then((allPublications) => {
 
 
 
-          fetch("http://localhost:3001/users/getall", myInit)
+          fetch("http://localhost:3001/news/users", myInit)
             .then(response => response.json())
             .catch((error) => res.status(400).json({ error: "ERROR" }))
             .then((allUsers) => {
