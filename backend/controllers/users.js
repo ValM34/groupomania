@@ -114,3 +114,18 @@ exports.signinUser = async (req, res) => {
 
 
 }
+
+exports.isLoggedIn = async (req, res, next) => {
+
+  // test multer
+  console.log(req.body)
+  // fin test multer
+
+  models.User.findOne({
+    attributes: ['id'],
+    where: { id: req.auth.users_idusers }
+  })
+    .then(user => { res.status(200).json(user) })
+    .catch(error => res.status(400).json({ error: "ERROR" }))
+
+};

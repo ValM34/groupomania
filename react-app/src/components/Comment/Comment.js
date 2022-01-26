@@ -1,10 +1,11 @@
 import React from 'react';
+import ButtonDeleteComment from '../ButtonDeleteComment/ButtonDeleteComment';
 import './Comment.css';
 
-const Feed = ({ commentState }) => {
+const Comment = ({ commentState }) => {
 
 
-
+    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
 
 
     return (
@@ -12,7 +13,8 @@ const Feed = ({ commentState }) => {
             <ol>
                 {commentState.comments.map(commentState => (
                     <li className="liComment" key={commentState.id}>
-                        <div className="nameAndSurnameComment">{commentState.user.name} {commentState.user.surname}</div>
+                        {getToken[0].userId === commentState.users_idusers ? <ButtonDeleteComment idComment={commentState.id} /> : ""}
+                        <div className="nameAndSurnameComment">{commentState.user.name} {commentState.user.surname} {commentState.id}</div>
                         <div className="contentComment">{commentState.content}</div>
                     </li>
                 ))}
@@ -21,4 +23,4 @@ const Feed = ({ commentState }) => {
     );
 }
 
-export default Feed;
+export default Comment;

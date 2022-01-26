@@ -54,13 +54,13 @@ exports.updateComment = async (req, res, next) => {
 
 exports.deleteComment = async (req, res, next) => {
     const getOneComment = await models.Comment.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
     if (!getOneComment) {
         return res.send(" ERROR ");
     }
     const deleteComment = await models.Comment.destroy({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     });
     return res.send("COMMENT_DELETED");
 };

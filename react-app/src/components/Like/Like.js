@@ -1,13 +1,12 @@
 import React from 'react';
 import './Like.css';
 
-const Likes = ({ commentState }) => {
+const Likes = ({ likesNumber }) => {
 
 
-    console.log(commentState.likes)
     return (
         <>
-            <div className="likePublication">{commentState.likes.length}</div>
+            <div className="likePublication">{likesNumber}</div>
         </>
     );
 }

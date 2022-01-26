@@ -26,18 +26,18 @@ function PublicationInput() {
 
         let myHeaders = new Headers({ 'Authorization': getToken[0].token });
 
-    
 
-        if (!formRef) {
+        if (!content) {
             return
+        } else {
+
+            fetch(formRef.current.action, {
+                method: formRef.current.method,
+                body: new FormData(formRef.current),
+                headers: myHeaders,
+            })
+            window.location.reload(false);
         }
-
-        fetch(formRef.current.action, {
-            method: formRef.current.method,
-            body: new FormData(formRef.current),
-            headers: myHeaders,
-        })
-
     }
 
 
@@ -45,12 +45,12 @@ function PublicationInput() {
 
     return (
         <div className="containerFlexbox">
-            
+
             <form className="containerFlexbox" method="POST" action="http://localhost:3001/news/publications/add" ref={formRef} onSubmit={onSubmit}>
                 <div className="containerTextareaCreatePublication">
-                        <textarea className="textareaCreatePublication" id="content-upload" type="text" name="content" onChange={onChangeContent} value={content} placeholder="Quoi de neuf ?" />
-                        <label className="labelUploadImage" htmlFor="image"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter une image</label>
-                        <input className="inputFile" id="image" type="file" name="image" />
+                    <textarea className="textareaCreatePublication" id="content-upload" type="text" name="content" onChange={onChangeContent} value={content} placeholder="Quoi de neuf ?" />
+                    <label className="labelUploadImage" htmlFor="image"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter une image</label>
+                    <input className="inputFile" id="image" type="file" name="image" />
                     <button className="buttonAddPublication" type="submit">Envoyer</button>
                 </div>
             </form>

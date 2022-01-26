@@ -81,17 +81,16 @@ exports.updatePublication = async (req, res, next) => {
     return res.send(getUpdatedPublication);
 };
 
-// CETTE ROUTE NE FONCTIONNE PAS SI DES COMMENTAIRES SONT LIES A CELLE-CI
 exports.deletePublication = async (req, res, next) => {
     const getOnePublication = await models.Publication.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
     if (!getOnePublication) {
         return res.send(" ERROR ");
     }
     console.log("salut 2 -------------------")
     const deletePublication = await models.Publication.destroy({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     });
     return res.send("PUBLICATION DELETED");
 };

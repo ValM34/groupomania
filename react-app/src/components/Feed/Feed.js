@@ -19,7 +19,6 @@ const Feed = ({ commentState }) => {
     const onChangeContent = (evt) => {
         setContent(evt.target.value)
     };
-    console.log(content)
 
     const commentInfos = {
         content: content,
@@ -31,22 +30,23 @@ const Feed = ({ commentState }) => {
         // Test d'envoyer le token dans le header
 
         let getToken = JSON.parse(localStorage.getItem('commandSignin'));
-        console.log(getToken[0].token)
 
         // Fin de test 
 
         if (!commentState.id || !getToken) {
-            return
+        } else {
+            fetch("http://localhost:3001/news/likes/add", {
+                method: "POST",
+                body: `publications_idpublications=${commentState.id}`,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': getToken[0].token
+                },
+            })
+            window.location.reload(false);
         }
-        fetch("http://localhost:3001/news/likes/add", {
-            method: "POST",
-            body: `publications_idpublications=${commentState.id}`,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': getToken[0].token
-            },
-        })
+
     }
 
     const onSubmitComment = (evt) => {
@@ -54,14 +54,12 @@ const Feed = ({ commentState }) => {
         // Test d'envoyer le token dans le header
 
         let getToken = JSON.parse(localStorage.getItem('commandSignin'));
-        console.log(getToken[0].token)
 
         // Fin de test 
 
         if (!commentInfos.content || !commentInfos.publications_idpublications || !commentInfos.users_idusers) {
             return
         }
-        console.log(commentInfos)
         fetch(formRef2.current.action, {
             method: formRef2.current.method,
             body: `content=${content}&publications_idpublications=${commentState.id}&users_idusers=${JSON.stringify(getToken[0].userId)}`,
@@ -71,38 +69,59 @@ const Feed = ({ commentState }) => {
                 'Authorization': getToken[0].token
             },
         })
+        window.location.reload(false);
 
     }
-    console.log(formRef2)
+    console.log(commentState.id)
+    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+
+    const deletePublication = (evt) => {
+        evt.preventDefault();
+
+        
+
+        fetch("http://localhost:3001/news/publications/delete", {
+            method: "DELETE",
+            mode: 'cors',
+            body: `id=${commentState.id}`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': getToken[0].token
+            }
+        })
+        window.location.reload(false);
+    }
 
     return (
         <div className="cardContainer">
             <li className="liPublication" key={commentState.id}>
-                    <>
-                        <div className="containerPublication">
-                            <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
-                            <div className="contentPublication">{commentState.content}</div>
+                <>  
+                    
+                    <div className="containerPublication">
+                    <div>{getToken[0].userId === commentState.users_idusers ? <button onClick={deletePublication}>Supprimer la publication {commentState.id}</button> : ""}</div>
+                        <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
+                        <div className="contentPublication">{commentState.content}</div>
+                    </div>
+                    <div className="containerComment">
+
+                        {commentState.comments ? <Comment commentState={commentState} key={commentState.id} /> : "Aucun commentaire"}
+
+                    </div>
+                    <div className="containerLikePublication">
+                        <button className="likeButton" ref={likeRef} type="button" onClick={onClickLike}><FontAwesomeIcon className="faThumbsUp" icon={faThumbsUp} /></button>
+                        <div>
+                            {commentState.likes ? <Likes likesNumber={commentState.likes.length} /> : "0"}
                         </div>
-                        <div className="containerComment">
+                    </div>
+                    <form className={commentState.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formRef2} onSubmit={onSubmitComment}>
+                        <textarea className="textareaCreateComment" id={commentState.id} type="text" name="content" onChange={onChangeContent} value={content} placeholder="Commenter..." />
+                        <button className="buttonComment" type="submit">Envoyer</button>
+                    </form>
 
-                            {commentState.comments ? <Comment commentState={commentState} key={commentState.id} /> : "Aucun commentaire"}
-
-                        </div>
-                        <div className="containerLikePublication">
-                            <button className="likeButton" ref={likeRef} type="button" onClick={onClickLike}><FontAwesomeIcon className="faThumbsUp" icon={faThumbsUp} /></button>
-                            <div>
-                                {commentState.likes ? <Likes commentState={commentState} key={commentState.id} /> : "0"}
-                            </div>
-                        </div>
-                        <form className={commentState.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formRef2} onSubmit={onSubmitComment}>
-                            <textarea className="textareaCreateComment" id={commentState.id} type="text" name="content" onChange={onChangeContent} value={content} placeholder="Commenter..." />
-                            <button className="buttonComment" type="submit">Envoyer</button>
-                        </form>
-
-                        <br />
+                    <br />
 
 
-                    </>
+                </>
             </li>
         </div>
     );

@@ -37,6 +37,7 @@ function Inscription(props) {
                 .then(response => response.json())
                 .then((infosUser) => {
                     console.log(infosUser);
+                    window.location.reload(false);
                 })
         }
     }
@@ -55,7 +56,7 @@ function Inscription(props) {
                     <label htmlFor="name">Prénom :</label><input ref={refName} required type="text" name="name" id="name" placeholder="prénom" maxLength="255" />
                     <label htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
                     <label htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
-                    {errorState ? <div>Veuillez renseigner tous les champs. Le mot de passe doit contenir au moins 8 caractères dont 1 lettre minuscule, 1 lettre majuscule et 1 chiffre.</div> : ''}
+                    {errorState ? <div>Veuillez renseigner tous les champs. Le mot de passe doit contenir au moins 8 caractères dont 1 lettre minuscule, 1 lettre majuscule et 1 chiffre.</div> : <div>Votre compte a bien été enregistré. Vous pouvez maintenant vous connecter.</div>}
                     <button className="buttonSignup" type="submit" id="buttonEvent">Inscription</button>
                 </div>
 
