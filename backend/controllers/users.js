@@ -129,3 +129,22 @@ exports.isLoggedIn = async (req, res, next) => {
     .catch(error => res.status(400).json({ error: "ERROR" }))
 
 };
+
+exports.deleteUser = async (req, res, next) => {
+
+  const user = req.auth.users_idusers;
+  if (!user) {
+      return res.send(" ERROR ");
+  }
+  const verifyUser = await models.User.findOne({
+      where: { id: req.auth.users_idusers }
+  })
+  if (verifyUser) {
+      const deleteUser = await models.User.destroy({
+          where: { id: req.auth.users_idusers }
+      });
+      return res.send("USER_DELETED");
+  } else {
+    return res.send(" ERROR ");
+  }
+};
