@@ -1,0 +1,14 @@
+.buttonDeleteComment {
+    background-color: transparent;
+    border: none;
+    margin: 0px;
+    transition: color 250ms ease-in-out;
+}
+.buttonDeleteComment:hover {
+    cursor: pointer;
+    color: red;
+}
+.faMinusCircle {
+    font-size: 18px;
+    margin-right: 5px;
+}

@@ -1,4 +1,7 @@
 import React from 'react';
+import './ButtonDeleteComment.css';
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ButtonDeleteComment = ({ idComment }) => {
 
@@ -24,7 +27,7 @@ const ButtonDeleteComment = ({ idComment }) => {
 
     return (
         <>
-            <button onClick={deleteComment}>Supprimer le commentaire</button>
+            <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> supprimer mon commentaire</button>
         </>
     );
 }

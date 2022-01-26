@@ -94,3 +94,17 @@
     font-size: 18px;
     padding: 10px;
 }
+.buttonDeletePublication {
+    background-color: transparent;
+    border: none;
+    margin: 0px;
+    transition: color 250ms ease-in-out;
+}
+.buttonDeletePublication:hover {
+    cursor: pointer;
+    color: red;
+}
+.faMinusCircle {
+    font-size: 18px;
+    
+}

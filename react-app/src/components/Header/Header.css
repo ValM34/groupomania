@@ -2,7 +2,26 @@ header {
     background-color: #2b73b3;
     width: 100vw;
     display: flex;
+    padding: 10px 50px;
+    margin-bottom: 20px;
+}
+.imgHeader {
+    background-color: #2b73b3;
+    width: 100vw;
+    display: flex;
     justify-content: center;
     padding: 10px 0px;
     margin-bottom: 20px;
+}
+.buttonDeleteAccount {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    border: none;
+    box-shadow: 2px 2px 2px black;
+    transition: background-color 250ms ease-in-out;
+}
+.buttonDeleteAccount:hover {
+    cursor: pointer;
+    background-color: red;
 }

@@ -50,13 +50,7 @@ function App() {
   }
 
 
-  const modifyLoggedOrNot = () => {
-    if (isNotLogged === true) {
-      setLoggedOrNot(false);
-    } else {
-      setLoggedOrNot(true);
-    }
-  }
+  
 
   return (
     <div className="App">

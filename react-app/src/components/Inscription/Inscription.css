@@ -83,3 +83,18 @@ input:focus {
     display: flex;
     flex-direction: row-reverse;
 }
+.errorRegister {
+    margin: 10px 20px 3px 20px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    border: solid 5px red;
+    background-color: #E69494;
+}
+.succesRegister {
+    margin: 10px 20px 3px 20px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    border: solid 5px #FFC523;
+}

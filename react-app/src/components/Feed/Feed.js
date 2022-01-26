@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import Comment from '../Comment/Comment';
 import Likes from '../Like/Like';
 import './Feed.css';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -98,7 +99,7 @@ const Feed = ({ commentState }) => {
                 <>  
                     
                     <div className="containerPublication">
-                    <div>{getToken[0].userId === commentState.users_idusers ? <button onClick={deletePublication}>Supprimer la publication {commentState.id}</button> : ""}</div>
+                    <div>{getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer ma publication</button> : ""}</div>
                         <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
                         <div className="contentPublication">{commentState.content}</div>
                     </div>

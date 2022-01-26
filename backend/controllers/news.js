@@ -88,7 +88,6 @@ exports.deletePublication = async (req, res, next) => {
     if (!getOnePublication) {
         return res.send(" ERROR ");
     }
-    console.log("salut 2 -------------------")
     const deletePublication = await models.Publication.destroy({
         where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     });
