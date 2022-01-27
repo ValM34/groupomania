@@ -146,3 +146,14 @@ exports.deleteUser = async (req, res, next) => {
     return res.send(" ERROR ");
   }
 };
+
+exports.isAdmin = async (req, res, next) => {
+
+  const allUsers = await models.User.findOne({
+    attributes: ['id','isAdmin'],
+    where: { id: req.auth.users_idusers }})
+      .then(users => { res.status(200).json(users) })
+      .catch(error => res.status(400).json({ error: "ERROR" }))
+
+
+};

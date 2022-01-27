@@ -196,6 +196,7 @@ function News() {
 
                                     if (commentState[0] === undefined) {
                                         setCommentState(newArray2)
+                                        console.log(newArray2)
                                     }
 
 

@@ -3,7 +3,7 @@ import './ButtonDeleteComment.css';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ButtonDeleteComment = ({ idComment }) => {
+const ButtonDeleteComment = ({ idComment, isAdmin }) => {
 
 
     let getToken = JSON.parse(localStorage.getItem('commandSignin'));
@@ -27,7 +27,7 @@ const ButtonDeleteComment = ({ idComment }) => {
 
     return (
         <>
-            <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> supprimer mon commentaire</button>
+            {isAdmin ? <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} />supprimer le commentaire</button> : <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} />supprimer mon commentaire</button>}
         </>
     );
 }

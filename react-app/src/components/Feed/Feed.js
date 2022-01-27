@@ -16,6 +16,20 @@ const Feed = ({ commentState }) => {
     const formRef2 = useRef(null);
     const likeRef = useRef(null);
     const dislikeRef = useRef(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+
+    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+
+    fetch("http://localhost:3001/users/isadmin", {
+        method:"GET",
+        headers: {'Authorization': getToken[0].token },
+        mode: "cors",
+        cache: "default"
+    })
+    .then(response => response.json())
+    .then((isAdmin) => {setIsAdmin(isAdmin.isAdmin)})
+                
 
     const onChangeContent = (evt) => {
         setContent(evt.target.value)
@@ -58,7 +72,7 @@ const Feed = ({ commentState }) => {
 
         // Fin de test 
 
-        if (!commentInfos.content || !commentInfos.publications_idpublications || !commentInfos.users_idusers) {
+        if (!content || !commentState.id || !getToken) {
             return
         }
         fetch(formRef2.current.action, {
@@ -74,12 +88,11 @@ const Feed = ({ commentState }) => {
 
     }
     console.log(commentState.id)
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
 
     const deletePublication = (evt) => {
         evt.preventDefault();
 
-        
+
 
         fetch("http://localhost:3001/news/publications/delete", {
             method: "DELETE",
@@ -96,16 +109,17 @@ const Feed = ({ commentState }) => {
     return (
         <div className="cardContainer">
             <li className="liPublication" key={commentState.id}>
-                <>  
-                    
+                <>
+
                     <div className="containerPublication">
-                    <div>{getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer ma publication</button> : ""}</div>
+                        <div>{isAdmin ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer la publication</button> : ""}</div>
+                        <div>{getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer ma publication</button> : ""}</div>
                         <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
                         <div className="contentPublication">{commentState.content}</div>
                     </div>
                     <div className="containerComment">
 
-                        {commentState.comments ? <Comment commentState={commentState} key={commentState.id} /> : "Aucun commentaire"}
+                        {commentState.comments ? <Comment isAdmin={isAdmin} commentState={commentState} key={commentState.id} /> : "Aucun commentaire"}
 
                     </div>
                     <div className="containerLikePublication">
