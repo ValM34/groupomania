@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header isNotLogged={isNotLogged} />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={isNotLogged ? <Home /> : <News />} />

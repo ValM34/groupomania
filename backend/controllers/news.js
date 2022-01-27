@@ -43,14 +43,11 @@ exports.addPublication = async (req, res, next) => {
     if (!addContent) {
         return res.send(" EMPTY_PUBLICATION ");
     }
+    let reqFile = req.file;
     const addPublication = await models.Publication.create({
         users_idusers: req.auth.users_idusers,
         content: req.body.content,
-        // test multer
-        if(filename){
-        attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        }
-        // fin test multer
+        attachment : reqFile ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : ""
     });
 
     return res.send({
@@ -60,12 +57,23 @@ exports.addPublication = async (req, res, next) => {
 };
 
 exports.updatePublication = async (req, res, next) => {
-    const newPublication = req.body.newPublication;
+    const newPublication = req.body.content;
     if (!newPublication) {
         return res.send(" EMPTY_PUBLICATION ");
     }
+    const isAdmin = await models.User.findOne({
+        where : { id: req.auth.users_idusers, isAdmin: 1 }
+    })
+    if (isAdmin) {
+        const adminUpdatePublication = await models.Publication.update(
+            { content: newPublication },
+            {
+                where: { id: req.body.id }
+            });
+        return res.send("PUBLICATION_UPDATED");
+    }
     const getOnePublication = await models.Publication.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
     if (!getOnePublication) {
         return res.send(" ERROR ");
@@ -73,15 +81,21 @@ exports.updatePublication = async (req, res, next) => {
     const updatePublication = await models.Publication.update(
         { content: newPublication },
         {
-            where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+            where: { id: req.body.id, users_idusers: req.auth.users_idusers }
         });
-    const getUpdatedPublication = await models.Publication.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
-    })
-    return res.send(getUpdatedPublication);
+    return res.send("PUBLICATION_UPDATED");
 };
 
 exports.deletePublication = async (req, res, next) => {
+    const isAdmin = await models.User.findOne({
+        where : { id: req.auth.users_idusers, isAdmin: 1 }
+    })
+    if (isAdmin) {
+        const adminDeletePublication = await models.Publication.destroy({
+            where: { id: req.body.id }
+        });
+        return res.send("PUBLICATION_DELETED");
+    }
     const getOnePublication = await models.Publication.findOne({
         where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
@@ -91,5 +105,5 @@ exports.deletePublication = async (req, res, next) => {
     const deletePublication = await models.Publication.destroy({
         where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     });
-    return res.send("PUBLICATION DELETED");
+    return res.send("PUBLICATION_DELETED");
 };

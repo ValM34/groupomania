@@ -117,9 +117,7 @@ exports.signinUser = async (req, res) => {
 
 exports.isLoggedIn = async (req, res, next) => {
 
-  // test multer
-  console.log(req.body)
-  // fin test multer
+
 
   models.User.findOne({
     attributes: ['id'],

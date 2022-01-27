@@ -1,7 +1,7 @@
 import iconLeftFont from './icon-left-font-monochrome-black.svg';
 import './Header.css';
 
-function Header() {
+function Header({ isNotLogged }) {
 
     let getToken = JSON.parse(localStorage.getItem('commandSignin'));
 
@@ -21,7 +21,7 @@ function Header() {
                 <div className="imgHeader">
                 <img src={iconLeftFont} alt="" className="iconLeftFont" />
                 </div>
-                <button className="buttonDeleteAccount" onClick={deleteUser}>Supprimer mon compte</button>
+                {isNotLogged ? "" : <button className="buttonDeleteAccount" onClick={deleteUser}>Supprimer mon compte</button>}
             </header>
     );
 }

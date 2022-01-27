@@ -27,7 +27,6 @@ exports.addLike = async (req, res, next) => {
 };
 
 exports.getLikes = async (req, res, next) => {
-    console.log(req.params.id)
     const allLikes = await models.Like.findAll({
         attributes: ['id', 'publications_idpublications']
     })

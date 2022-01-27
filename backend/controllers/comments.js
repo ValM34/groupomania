@@ -35,8 +35,19 @@ exports.updateComment = async (req, res, next) => {
     if (!newComment) {
         return res.send(" EMPTY_COMMENT ");
     }
+    const isAdmin = await models.User.findOne({
+        where : { id: req.auth.users_idusers, isAdmin: 1 }
+    })
+    if (isAdmin) {
+        const adminUpdateComment = await models.Comment.update(
+            { content: newComment },
+            {
+                where: { id: req.body.id }
+            });
+        return res.send("COMMENT_UPDATED");
+    }
     const getOneComment = await models.Comment.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+        where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
     if (!getOneComment) {
         return res.send(" ERROR ");
@@ -44,15 +55,21 @@ exports.updateComment = async (req, res, next) => {
     const updateComment = await models.Comment.update(
         { content: newComment },
         {
-            where: { id: req.params.id, users_idusers: req.auth.users_idusers }
+            where: { id: req.body.id, users_idusers: req.auth.users_idusers }
         });
-    const getUpdatedComment = await models.Comment.findOne({
-        where: { id: req.params.id, users_idusers: req.auth.users_idusers }
-    })
-    return res.send(getUpdatedComment);
+        return res.send("COMMENT_UPDATED");
 };
 
 exports.deleteComment = async (req, res, next) => {
+    const isAdmin = await models.User.findOne({
+        where : { id: req.auth.users_idusers, isAdmin: 1 }
+    })
+    if (isAdmin) {
+        const adminDeleteComment = await models.Comment.destroy({
+            where: { id: req.body.id }
+        });
+        return res.send("COMMENT_DELETED");
+    }
     const getOneComment = await models.Comment.findOne({
         where: { id: req.body.id, users_idusers: req.auth.users_idusers }
     })
