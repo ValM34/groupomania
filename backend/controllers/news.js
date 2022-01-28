@@ -57,6 +57,7 @@ exports.addPublication = async (req, res, next) => {
 };
 
 exports.updatePublication = async (req, res, next) => {
+    console.log(req.body)
     const newPublication = req.body.content;
     if (!newPublication) {
         return res.send(" EMPTY_PUBLICATION ");
