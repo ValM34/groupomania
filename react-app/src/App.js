@@ -29,28 +29,28 @@ function App() {
   let getToken = JSON.parse(localStorage.getItem('commandSignin'));
 
   // Fin de test 
+  if (isNotLogged === true) {
+    if (!getToken) {
+      console.log("Ca fonctionne pas")
+    } else {
 
-  if (!getToken) {
-    console.log("Ca fonctionne pas")
-  } else {
+      fetch("http://localhost:3001/users", {
+        method: "GET",
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': getToken[0].token
+        },
+      })
+        .then(response => response.json())
+        .then((response) => {
+          if (response.id) {
+            setLoggedOrNot(false);
+          }
+        });
+    }
 
-    fetch("http://localhost:3001/users", {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': getToken[0].token
-      },
-    })
-      .then(response => response.json())
-      .then((response) => {
-        if (response.id) {
-          setLoggedOrNot(false);
-        }
-      });
   }
 
-
-  
 
   return (
     <div className="App">
