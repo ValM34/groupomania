@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require("helmet");
 const createError = require('http-errors');
 const models = require('./models');
 const jwt = require('jsonwebtoken');
@@ -12,6 +13,8 @@ const usersRoutes = require('./routes/users');
 const likesRoutes = require('./routes/likes');
 
 app.use(express.json()); // Cela sert à ce que les requêtent comme "req.body" soient comprises par le serveur
+
+app.use(helmet());
 
 // Body Parser configuration
 app.use(bodyParser.urlencoded({ extended: true }));
