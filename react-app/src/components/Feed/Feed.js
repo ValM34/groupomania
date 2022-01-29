@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import Comment from '../Comment/Comment';
 import Likes from '../Like/Like';
+import UpdatePublication from '../UpdatePublication/UpdatePublication';
 import './Feed.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle, faEdit, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faMinusCircle, faEdit, faThumbsUp, faImage } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -11,10 +12,10 @@ const Feed = ({ commentState, isAdmin }) => {
 
 
     const [content, setContent] = useState('');
-    const [contentUpdatePublication, setContentUpdatePublication] = useState('');
     const [updatePublication, setUpdatePublication] = useState(false);
     const formRef2 = useRef(null);
     const likeRef = useRef(null);
+    
 
 
     let getToken = JSON.parse(localStorage.getItem('commandSignin'));
@@ -23,9 +24,7 @@ const Feed = ({ commentState, isAdmin }) => {
         setContent(evt.target.value)
     };
 
-    const onChangeContentUpdatePublication = (evt) => {
-        setContentUpdatePublication(evt.target.value)
-    };
+    
 
 
     const onClickLike = (evt) => {
@@ -99,19 +98,8 @@ const Feed = ({ commentState, isAdmin }) => {
         setUpdatePublication(true);
     }
 
-    const buttonUpdatePublication = (evt) => {
-        evt.preventDefault();
-
-        fetch("http://localhost:3001/news/publications/update", {
-            method: "POST",
-            mode: "cors",
-            body: `id=${commentState.id}&content=${contentUpdatePublication}`,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': getToken[0].token
-            }
-        })
-    }
+    
+    
 
     return (
         <div className="cardContainer">
@@ -123,13 +111,11 @@ const Feed = ({ commentState, isAdmin }) => {
                         <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer ma publication</button> : ""}</div>
                         <div>{isAdmin ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /> Modifier la publication</button> : ""}</div>
                         <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /> Modifier ma publication</button> : ""}</div>
-                        <div>{updatePublication ?
-                            <><textarea type="text" name="contentUpdatePublication" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={commentState.content}></textarea> 
-                            <button className="buttonUpdatePublication" type="button" onClick={buttonUpdatePublication}>Envoyer</button></>
-                            : ""}</div>
-                        
+                        <div>{updatePublication ? <UpdatePublication commentState={commentState} /> : ""}</div>
+
                         <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
                         <div className="contentPublication">{commentState.content}</div>
+                        <img src={commentState.attachment} alt="" className="imgFeed" />
                     </div>
                     <div className="containerComment">
 

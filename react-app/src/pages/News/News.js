@@ -30,6 +30,7 @@ function News() {
 
     useEffect(() => {
 
+        if (commentState[0] === undefined) {
         let tableau = [];
     // Test d'envoyer le token dans le header
 
@@ -239,7 +240,7 @@ function News() {
                 })
         }
         catch (err) { console.log(err) }
-
+    }
     }, [commentState, getToken])
 
     // Fin test grand tableau
