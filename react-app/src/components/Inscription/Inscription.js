@@ -1,4 +1,3 @@
-import './Inscription.css';
 import { useState, useRef } from 'react';
 
 function Inscription(props) {
@@ -53,10 +52,10 @@ function Inscription(props) {
                         <button onClick={() => props.func()} className="buttonSwitchSignin" type="button" id="buttonSwitch">Connexion</button>
                         <div className="ongletSwitchSignin">Inscription</div>
                     </div>
-                    <label htmlFor="surname">Nom :</label><input ref={refSurname} required type="text" name="surname" id="surname" placeholder="nom" maxLength="255" />
-                    <label htmlFor="name">Prénom :</label><input ref={refName} required type="text" name="name" id="name" placeholder="prénom" maxLength="255" />
-                    <label htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
-                    <label htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
+                    <label className="labelHome" htmlFor="surname">Nom :</label><input ref={refSurname} required type="text" name="surname" id="surname" placeholder="nom" maxLength="255" />
+                    <label className="labelHome" htmlFor="name">Prénom :</label><input ref={refName} required type="text" name="name" id="name" placeholder="prénom" maxLength="255" />
+                    <label className="labelHome" htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
+                    <label className="labelHome" htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
                     {errorState ? <div className="errorRegister">Veuillez renseigner tous les champs.<br /> Le mot de passe doit contenir au moins 8 caractères dont 1 lettre minuscule, 1 lettre majuscule et 1 chiffre.</div> : ""}
                     {register ? <div className="succesRegister">Votre compte a bien été enregistré. Vous pouvez maintenant vous connecter.</div> : ""}
                     <button className="buttonSignup" type="submit" id="buttonEvent">Inscription</button>

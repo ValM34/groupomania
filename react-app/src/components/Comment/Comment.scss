@@ -2,18 +2,18 @@
     list-style-type: none;
     padding-top: 5px;
     font-size: 18px;
-    background-color: #63A6E2;
+    background-color: lighten($color-primary, 15);
     margin: 10px 0px;
     border-radius: 10px;
     padding: 10px;
     transition: background-color 250ms ease-in-out;
 }
 .liComment:hover {
-    background-color: #94C0E6;
+    background-color: lighten($color-primary, 25);
 }
 .nameAndSurnameComment {
-    color: #343434;
+    color: lighten(black, 15);
 }
 .contentComment {
-    color: #1A1A1A;
+    color: lighten(black, 5);
 }

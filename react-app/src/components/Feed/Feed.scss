@@ -3,14 +3,22 @@
     justify-content: center;
 }
 .liPublication {
-    background-color: #2b73b3;
+    background-color: $color-primary;
     width: 680px;
     margin-bottom: 20px;
     padding: 30px;
     border-radius: 30px;
-    box-shadow: 0px 0px 5px #2b73b3;
+    box-shadow: 0px 0px 5px $color-primary;
     display: flex;
     flex-direction: column;
+    @include tablette {
+        width: 550px;
+    }
+    @include mobile {
+        padding: 10px 2.5%;
+        width: 100%;
+        border-radius: 5px;
+    }
 }
 .textareaCreateComment {
     height: 80px;
@@ -20,29 +28,32 @@
     font-size: 15px;
     width: 100%;
     font-size: 20px;
+    @include mobile {
+        width: 100%;
+    }
 }
 .textareaCreateComment:focus {
-    outline: #FEBB00 solid 2px;
+    outline: $color-secondary solid 2px;
 }
 .nameAndSurnamePublication {
     font-size: 20px;
-    color: #E8E8E8;
+    color: darken($color-tertiary, 20);
 }
 .contentPublication {
     font-size: 20px;
-    color: white;
+    color: $color-tertiary;
 }
 .containerPublication {
-    border-bottom: solid #FEBB00 2px;
+    border-bottom: solid $color-secondary 2px;
     padding-bottom: 10px;
 }
 .buttonComment {
-    background-color: #FEBB00;
+    background-color: $color-secondary;
     border: none;
-    box-shadow: 0px 0px 2px #FEBB00;
+    box-shadow: 0px 0px 2px $color-secondary;
     font-size: 24px;
     font-weight: bold;
-    color: #2b73b3;
+    color: $color-primary;
     margin-top: 10px;
     border-radius: 5px;
     transition: background-color 250ms ease-in-out;
@@ -52,28 +63,28 @@
 }
 .buttonComment:hover {
     cursor: pointer;
-    background-color: #FFC523;
+    background-color: $color-secondary;
 }
 
 .buttonComment:focus {
-    outline: white solid 2px;
+    outline: $color-tertiary solid 2px;
 }
 .likeButton {
     background-color: transparent;
     border: none;
 }
 .faThumbsUp {
-    color: white;
+    color: $color-tertiary;
     font-size: 22px;
     transition: color 250ms ease-in-out;
     margin-right: 5px;
 }
 .faThumbsUp:hover {
-    color: #FFC523;
+    color: $color-secondary;
     cursor: pointer;
 }
 .faThumbsUp:active {
-    color: white;
+    color: $color-tertiary;
     cursor: pointer;
 }
 .dislikeButton {
@@ -82,23 +93,21 @@
 }
 .containerLikePublication {
     display: flex;
-}
-.containerLikePublication {
-    display: flex;
-    padding: 0px 10px 5px 10px;
     font-size: 22px;
-    color: white;
+    color: $color-tertiary;
+    padding: 0px 0px 5px 0px;
 }
 .containerComment {
-    color: white;
+    color: $color-tertiary;
     font-size: 18px;
-    padding: 10px;
+    padding: 0px;
 }
 .buttonDeletePublication {
     background-color: transparent;
     border: none;
     margin: 0px;
     transition: color 250ms ease-in-out;
+    margin-right: 10px;
 }
 .buttonDeletePublication:hover {
     cursor: pointer;
@@ -110,4 +119,21 @@
 }
 .imgFeed {
     max-width: 620px;
+    @include tablette {
+        max-width: 490px;
+    }
+    @include mobile {
+        width: 100%;
+    }
+    
+}
+.containerButtonsPublications {
+    display: flex;
+    justify-content: flex-end;
+}
+.faEdit {
+    font-size: 20px;
+}
+.faMinusCircle {
+    font-size: 20px;
 }

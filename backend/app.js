@@ -14,7 +14,9 @@ const likesRoutes = require('./routes/likes');
 
 app.use(express.json()); // Cela sert à ce que les requêtent comme "req.body" soient comprises par le serveur
 
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: false }));
+
+
 
 // Body Parser configuration
 app.use(bodyParser.urlencoded({ extended: true }));

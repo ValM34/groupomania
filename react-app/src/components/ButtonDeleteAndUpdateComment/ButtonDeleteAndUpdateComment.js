@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ButtonDeleteComment.css';
 import { faMinusCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -53,11 +52,13 @@ const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
 
     return (
         <>
-            {isAdmin ? <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} />supprimer le commentaire</button> : <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} />supprimer mon commentaire</button>}
-            {isAdmin ? <button className="buttonDeleteComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} />Modifier le commentaire</button> : <button className="buttonDeleteComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} />Modifier mon commentaire</button>}
+            <div className="containerButtonsComments">
+                {isAdmin ? <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button>}
+                {isAdmin ? <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button>}
+            </div>
             <div>{updateComment ?
-                <><textarea type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
-                    <button className="buttonUpdatePublication" type="button" onClick={buttonUpdateComment}>Envoyer</button></>
+                <><textarea className="textareaUpdateComment" type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
+                    <button className="buttonUpdateCommentSubmit" type="button" onClick={buttonUpdateComment}>Modifier</button></>
                 : ""}</div>
         </>
     );

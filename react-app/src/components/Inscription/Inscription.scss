@@ -1,4 +1,4 @@
-label {
+.labelHome {
     margin: 10px 20px 3px 20px;
 }
 
@@ -11,27 +11,27 @@ input {
 }
 
 input:focus {
-    outline: #FEBB00 solid 2px;
+    outline: $color-secondary solid 2px;
 }
 
 .buttonSignup {
-    background-color: #FEBB00;
+    background-color: $color-secondary;
     border: none;
-    box-shadow: 0px 0px 2px #FEBB00;
+    box-shadow: 0px 0px 2px $color-secondary;
     font-size: 24px;
     font-weight: bold;
-    color: #2b73b3;
+    color: $color-primary;
     margin-top: 10px;
     border-radius: 5px;
     transition: background-color 250ms ease-in-out;
     margin: 20px;
 }
 .buttonSwitchSignin {
-    background-color: #FEBB00;
+    background-color: $color-secondary;
     border: none;
     font-size: 24px;
     font-weight: bold;
-    color: #2b73b3;
+    color: $color-primary;
     border-top-right-radius: 30px;
     transition: background-color 250ms ease-in-out;
     width: 50%;
@@ -39,14 +39,14 @@ input:focus {
 }
 .buttonSwitchSignin:hover {
     cursor: pointer;
-    background-color: #FFC523;
+    background-color: $color-secondary;
 }
 .ongletSwitchSignin {
-    background-color: #2b73b3;
+    background-color: $color-primary;
     border: none;
     font-size: 24px;
     font-weight: bold;
-    color: #FFC523;
+    color: $color-secondary;
     border-top-left-radius: 30px;
     transition: background-color 250ms ease-in-out;
     width: 50%;
@@ -54,11 +54,11 @@ input:focus {
     text-align: center;
 }
 .buttonSwitchSignin:focus {
-    outline: #2b73b3 solid 2px;
+    outline: $color-primary solid 2px;
 }
 .buttonSignup:hover {
     cursor: pointer;
-    background-color: #FFC523;
+    background-color: $color-secondary;
 }
 
 .buttonSignup:focus {
@@ -68,11 +68,14 @@ input:focus {
 .containerSignup {
     display: flex;
     flex-direction: column;
-    background-color: #2b73b3;
-    box-shadow: 0px 0px 5px #2b73b3;
+    background-color: $color-primary;
+    box-shadow: 0px 0px 5px $color-primary;
     border-radius: 30px;
     color: white;
     width: 340px;
+    @include mobile {
+        width: 100%;
+    }
 }
 
 .formIndex {
@@ -96,5 +99,5 @@ input:focus {
     font-size: 20px;
     text-align: center;
     padding: 10px;
-    border: solid 5px #FFC523;
+    border: solid 5px $color-secondary;
 }

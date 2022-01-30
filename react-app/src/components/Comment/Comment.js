@@ -1,6 +1,5 @@
 import React from 'react';
-import ButtonDeleteComment from '../ButtonDeleteComment/ButtonDeleteComment';
-import './Comment.css';
+import ButtonDeleteComment from '../ButtonDeleteAndUpdateComment/ButtonDeleteAndUpdateComment';
 
 const Comment = ({ commentState, isAdmin }) => {
 

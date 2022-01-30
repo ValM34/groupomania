@@ -1,4 +1,3 @@
-import './Connexion.css'
 import { useState, useRef, useEffect } from 'react';
 
 function Connexion(props) {
@@ -59,8 +58,8 @@ function Connexion(props) {
                         <button onClick={() => props.func()} className="buttonSwitchSignup" type="button" id="buttonSwitch">Inscription</button>
                         <div className="ongletSwitchSignup">Connexion</div>
                     </div>
-                    <label htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
-                    <label htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
+                    <label className="labelHome" htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
+                    <label className="labelHome" htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
                     {errorState ? <div>Veuillez renseigner tous les champs. Le mot de passe doit contenir au moins 8 caractères dont 1 lettre minuscule, 1 lettre majuscule et 1 chiffre.</div> : ''}
                     <button className="buttonSignup" type="submit" id="buttonEvent">Connexion</button>
                 </div>

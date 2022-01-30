@@ -1,4 +1,3 @@
-import './PublicationInput.css';
 import { useState, useRef } from 'react';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -2,9 +2,8 @@ import React, { useState, useRef } from 'react';
 import Comment from '../Comment/Comment';
 import Likes from '../Like/Like';
 import UpdatePublication from '../UpdatePublication/UpdatePublication';
-import './Feed.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle, faEdit, faThumbsUp, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faMinusCircle, faEdit, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -15,7 +14,7 @@ const Feed = ({ commentState, isAdmin }) => {
     const [updatePublication, setUpdatePublication] = useState(false);
     const formRef2 = useRef(null);
     const likeRef = useRef(null);
-    
+
 
 
     let getToken = JSON.parse(localStorage.getItem('commandSignin'));
@@ -24,7 +23,7 @@ const Feed = ({ commentState, isAdmin }) => {
         setContent(evt.target.value)
     };
 
-    
+
 
 
     const onClickLike = (evt) => {
@@ -98,8 +97,8 @@ const Feed = ({ commentState, isAdmin }) => {
         setUpdatePublication(true);
     }
 
-    
-    
+
+
 
     return (
         <div className="cardContainer">
@@ -107,10 +106,12 @@ const Feed = ({ commentState, isAdmin }) => {
                 <>
 
                     <div className="containerPublication">
-                        <div>{isAdmin ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer la publication</button> : ""}</div>
-                        <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /> Supprimer ma publication</button> : ""}</div>
-                        <div>{isAdmin ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /> Modifier la publication</button> : ""}</div>
-                        <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /> Modifier ma publication</button> : ""}</div>
+                        <div className="containerButtonsPublications">
+                            <div>{isAdmin ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : ""}</div>
+                            <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : ""}</div>
+                            <div>{isAdmin ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : ""}</div>
+                            <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : ""}</div>
+                        </div>
                         <div>{updatePublication ? <UpdatePublication commentState={commentState} /> : ""}</div>
 
                         <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>

@@ -1,5 +1,4 @@
 import iconLeftFont from './icon-left-font-monochrome-black.svg';
-import './Header.css';
 
 function Header({ isNotLogged }) {
 

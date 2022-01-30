@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Home from './pages/Home/Home';
 import Header from './components/Header/Header';
 
@@ -31,7 +31,6 @@ function App() {
   // Fin de test 
   if (isNotLogged === true) {
     if (!getToken) {
-      console.log("Ca fonctionne pas")
     } else {
 
       fetch("http://localhost:3001/users", {

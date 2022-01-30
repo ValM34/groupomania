@@ -1,12 +1,12 @@
 header {
-    background-color: #2b73b3;
+    background-color: $color-primary;
     width: 100vw;
     display: flex;
     padding: 10px 50px;
     margin-bottom: 20px;
 }
 .imgHeader {
-    background-color: #2b73b3;
+    background-color: $color-primary;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@ header {
 }
 .buttonDeleteAccount {
     background-color: black;
-    color: white;
+    color: $color-tertiary;
     font-size: 20px;
     border: none;
     box-shadow: 2px 2px 2px black;
@@ -24,4 +24,12 @@ header {
 .buttonDeleteAccount:hover {
     cursor: pointer;
     background-color: red;
+}
+.imgHeader > img {
+    @include tablette {
+        width: 300px;
+    }
+    @include mobile {
+        width: 150px;
+    }
 }

@@ -34,11 +34,11 @@ function UpdatePublication({ commentState }) {
     return (
         <div className="containerFlexbox">
 
-            <form className="containerFlexbox" ref={formUpdatePublicationRef} onSubmit={buttonUpdatePublication}>
-                <textarea type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={commentState.content}></textarea>
-                <label className="labelUploadImage" htmlFor="imageUpdate"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter une image</label>
+            <form className="containerUpdatePublication" ref={formUpdatePublicationRef} onSubmit={buttonUpdatePublication}>
+                <textarea className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={commentState.content}></textarea>
+                <label className="labelUpdateImage" htmlFor="imageUpdate"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter ou modifier une image</label>
                 <input className="inputFile" id="imageUpdate" type="file" name="image" />
-                <button className="buttonUpdatePublication" type="submit">Envoyer</button>
+                <button className="buttonUpdatePublication" type="submit">Modifier</button>
             </form>
 
         </div>

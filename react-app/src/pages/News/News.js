@@ -63,7 +63,7 @@ function News() {
 
                 .then((allComments) => {
 
-
+                    console.log(allComments)
                     let y = false;
                     for (let i = 0; i < allComments.length; i++) {
                         if (tableau.length === 0) {
