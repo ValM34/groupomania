@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Feed from '../../components/Feed/Feed';
 import PublicationInput from '../../components/PublicationInput/PublicationInput';
+import Footer from '../../components/Footer/Footer';
 
 function News() {
 
@@ -255,6 +256,7 @@ function News() {
                 })
             }
             </ol>
+            <Footer />
         </>
     );
 }

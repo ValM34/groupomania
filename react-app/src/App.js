@@ -11,9 +11,6 @@ import { Routes, Route } from 'react-router-dom';
 import News from "./pages/News/News";
 // TestMap //
 
-// Test form
-import TestFormulaire from './components/TestFormulaire/TestFormulaire';
-// fin test form
 
 import { useState } from 'react';
 

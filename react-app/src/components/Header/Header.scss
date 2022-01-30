@@ -13,18 +13,6 @@ header {
     padding: 10px 0px;
     margin-bottom: 20px;
 }
-.buttonDeleteAccount {
-    background-color: black;
-    color: $color-tertiary;
-    font-size: 20px;
-    border: none;
-    box-shadow: 2px 2px 2px black;
-    transition: background-color 250ms ease-in-out;
-}
-.buttonDeleteAccount:hover {
-    cursor: pointer;
-    background-color: red;
-}
 .imgHeader > img {
     @include tablette {
         width: 300px;
