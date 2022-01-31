@@ -9,14 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    /*
-    static associate(models) {
-      define association here
-      models.User.hasMany(models.Publication);   // Ca me crée un "userId" alors que ça devrait créer une liaison pour "user_idusers"
-      models.User.hasMany(models.Comment);
-      models.User.hasMany(models.Like);
-    }
-    */
+    
   };
   User.init({
     email: DataTypes.STRING,
