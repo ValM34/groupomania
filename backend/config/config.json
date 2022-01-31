@@ -1,24 +1,24 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234",
-    "database": "groupomania_development",
+    "username": "your database username",
+    "password": "your database password",
+    "database": "databaseName_development",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+01:00"
   },
   "test": {
-    "username": "root",
-    "password": "1234",
-    "database": "groupomania_test",
+    "username": "your database username",
+    "password": "your database password",
+    "database": "databaseName_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+01:00"
   },
   "production": {
-    "username": "root",
-    "password": "1234",
-    "database": "groupomania_production",
+    "username": "your database username",
+    "password": "your database password",
+    "database": "databaseName_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+01:00"
