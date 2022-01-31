@@ -17,14 +17,7 @@ exports.getAllPublications = async (req, res, next) => {
 
 // Ajout d'un getall users pour afficher les noms dans le feed.
 
-exports.getAllUsers = async (req, res, next) => {
 
-    const allUsers = await models.User.findAll({ attributes: ['id', 'name', 'surname'] })
-        .then(users => { res.status(200).json(users) })
-        .catch(error => res.status(400).json({ error: "ERROR" }))
-
-
-};
 
 exports.getOnePublication = async (req, res, next) => {
     const getOnePublication = await models.Publication.findOne({
@@ -100,7 +93,7 @@ exports.updatePublication = async (req, res, next) => {
                     })
                 })
             return res.send("PUBLICATION_UPDATED");
-            
+
         } else if (newPublication && !reqFile) {
             const adminUpdatePublication = await models.Publication.update(
                 { content: newPublication },
@@ -131,7 +124,7 @@ exports.updatePublication = async (req, res, next) => {
                 })
             })
         return res.send("PUBLICATION_UPDATED");
-        
+
     } else if (req.file && newPublication) {
         const findFilename = await models.Publication.findOne({
             where: { id: req.body.id }
@@ -150,7 +143,7 @@ exports.updatePublication = async (req, res, next) => {
                 })
             })
         return res.send("PUBLICATION_UPDATED");
-        
+
     } else if (newPublication && !reqFile) {
         const adminUpdatePublication = await models.Publication.update(
             { content: newPublication },

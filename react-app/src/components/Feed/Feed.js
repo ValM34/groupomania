@@ -7,7 +7,7 @@ import { faMinusCircle, faEdit, faThumbsUp } from '@fortawesome/free-solid-svg-i
 
 
 
-const Feed = ({ commentState, isAdmin }) => {
+const Feed = ({ publicationsData, isAdmin }) => {
 
 
     const [content, setContent] = useState('');
@@ -16,8 +16,7 @@ const Feed = ({ commentState, isAdmin }) => {
     const likeRef = useRef(null);
 
 
-
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+    let getToken = JSON.parse(localStorage.getItem('userData'));
 
     const onChangeContent = (evt) => {
         setContent(evt.target.value)
@@ -28,17 +27,15 @@ const Feed = ({ commentState, isAdmin }) => {
 
     const onClickLike = (evt) => {
         evt.preventDefault();
-        // Test d'envoyer le token dans le header
 
-        let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+        let getToken = JSON.parse(localStorage.getItem('userData'));
 
-        // Fin de test 
 
-        if (!commentState.id || !getToken) {
+        if (!publicationsData.id || !getToken) {
         } else {
             fetch("http://localhost:3001/news/likes/add", {
                 method: "POST",
-                body: `publications_idpublications=${commentState.id}`,
+                body: `publications_idpublications=${publicationsData.id}`,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -52,18 +49,16 @@ const Feed = ({ commentState, isAdmin }) => {
 
     const onSubmitComment = (evt) => {
         evt.preventDefault();
-        // Test d'envoyer le token dans le header
 
-        let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+        let getToken = JSON.parse(localStorage.getItem('userData'));
 
-        // Fin de test 
 
-        if (!content || !commentState.id || !getToken) {
+        if (!content || !publicationsData.id || !getToken) {
             return
         }
         fetch(formRef2.current.action, {
             method: formRef2.current.method,
-            body: `content=${content}&publications_idpublications=${commentState.id}&users_idusers=${JSON.stringify(getToken[0].userId)}`,
+            body: `content=${content}&publications_idpublications=${publicationsData.id}&users_idusers=${JSON.stringify(getToken[0].userId)}`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -82,7 +77,7 @@ const Feed = ({ commentState, isAdmin }) => {
         fetch("http://localhost:3001/news/publications/delete", {
             method: "DELETE",
             mode: 'cors',
-            body: `id=${commentState.id}`,
+            body: `id=${publicationsData.id}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': getToken[0].token
@@ -102,35 +97,35 @@ const Feed = ({ commentState, isAdmin }) => {
 
     return (
         <div className="cardContainer">
-            <li className="liPublication" key={commentState.id}>
+            <li className="liPublication" key={publicationsData.id}>
                 <>
 
                     <div className="containerPublication">
                         <div className="containerButtonsPublications">
                             <div>{isAdmin ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : ""}</div>
-                            <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : ""}</div>
+                            <div>{isAdmin === false & getToken[0].userId === publicationsData.users_idusers ? <button className="buttonDeletePublication" onClick={displayUpdatePublication}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : ""}</div>
                             <div>{isAdmin ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : ""}</div>
-                            <div>{isAdmin === false & getToken[0].userId === commentState.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : ""}</div>
+                            <div>{isAdmin === false & getToken[0].userId === publicationsData.users_idusers ? <button className="buttonDeletePublication" onClick={deletePublication}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : ""}</div>
                         </div>
-                        <div>{updatePublication ? <UpdatePublication commentState={commentState} /> : ""}</div>
+                        <div>{updatePublication ? <UpdatePublication publicationsData={publicationsData} /> : ""}</div>
 
-                        <div className="nameAndSurnamePublication">{commentState.user.name} {commentState.user.surname}</div>
-                        <div className="contentPublication">{commentState.content}</div>
-                        <img src={commentState.attachment} alt="" className="imgFeed" />
+                        <div className="nameAndSurnamePublication">{publicationsData.user.name} {publicationsData.user.surname}</div>
+                        <div className="contentPublication">{publicationsData.content}</div>
+                        <img src={publicationsData.attachment} alt="" className="imgFeed" />
                     </div>
                     <div className="containerComment">
 
-                        {commentState.comments ? <Comment isAdmin={isAdmin} commentState={commentState} key={commentState.id} /> : "Aucun commentaire"}
+                        {publicationsData.comments ? <Comment isAdmin={isAdmin} publicationsData={publicationsData} key={publicationsData.id} /> : "Aucun commentaire"}
 
                     </div>
                     <div className="containerLikePublication">
                         <button className="likeButton" ref={likeRef} type="button" onClick={onClickLike}><FontAwesomeIcon className="faThumbsUp" icon={faThumbsUp} /></button>
                         <div>
-                            {commentState.likes ? <Likes likesNumber={commentState.likes.length} /> : "0"}
+                            {publicationsData.likes ? <Likes likesNumber={publicationsData.likes.length} /> : "0"}
                         </div>
                     </div>
-                    <form className={commentState.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formRef2} onSubmit={onSubmitComment}>
-                        <textarea className="textareaCreateComment" id={commentState.id} type="text" name="content" onChange={onChangeContent} value={content} placeholder="Commenter..." />
+                    <form className={publicationsData.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formRef2} onSubmit={onSubmitComment}>
+                        <textarea className="textareaCreateComment" id={publicationsData.id} type="text" name="content" onChange={onChangeContent} value={content} placeholder="Commenter..." />
                         <button className="buttonComment" type="submit">Envoyer</button>
                     </form>
 

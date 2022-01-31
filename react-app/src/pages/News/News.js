@@ -5,39 +5,18 @@ import Footer from '../../components/Footer/Footer';
 
 function News() {
 
-    const [commentState, setCommentState] = useState([]);
-    /*
-        fetch("http://localhost:3001/news/comments")
-            .then(response => response.json())
-    
-            .then((allComments) => {
-                if (commentState[0] === undefined) {
-                    setCommentState(allComments)
-                }
-            })
-        */
-
-    // Test grand tableau
-
-    
-
+    const [publicationsData, setPublicationsData] = useState([]);
     const [isAdmin, setIsAdmin] = useState(false);
 
-
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
-
-
-
+    let getToken = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
 
-        if (commentState[0] === undefined) {
-        let tableau = [];
-    // Test d'envoyer le token dans le header
+        if (publicationsData[0] === undefined) {
+        let publicationsArrayDataV1 = [];
 
-    let cat = JSON.parse(localStorage.getItem('commandSignin'));
 
-    let myHeaders = new Headers({ 'Authorization': cat[0].token });
+    let myHeaders = new Headers({ 'Authorization': getToken[0].token });
 
     let myInit = {
         method: 'GET',
@@ -57,7 +36,6 @@ function News() {
             .then(response => response.json())
             .then((isAdmin) => { setIsAdmin(isAdmin.isAdmin) })
 
-        // Fin de test 
         try {
             fetch("http://localhost:3001/news/comments", myInit)
                 .then(response => response.json())
@@ -67,14 +45,14 @@ function News() {
                     console.log(allComments)
                     let y = false;
                     for (let i = 0; i < allComments.length; i++) {
-                        if (tableau.length === 0) {
-                            tableau.push(allComments[i]);
+                        if (publicationsArrayDataV1.length === 0) {
+                            publicationsArrayDataV1.push(allComments[i]);
                             i++;
                         }
-                        for (let o = 0; o < tableau.length; o++) {
-                            console.log(tableau.length);
-                            if (tableau.length === 1){y = true; break;}
-                            if (allComments[i].publications_idpublications === tableau[o].publications_idpublications) {
+                        for (let o = 0; o < publicationsArrayDataV1.length; o++) {
+                            console.log(publicationsArrayDataV1.length);
+                            if (publicationsArrayDataV1.length === 1){y = true; break;}
+                            if (allComments[i].publications_idpublications === publicationsArrayDataV1[o].publications_idpublications) {
                                 y = true;
                                 break;
                             } else {
@@ -82,7 +60,7 @@ function News() {
                             }
                         }
                         if (y !== true) {
-                            tableau.push(allComments[i]);
+                            publicationsArrayDataV1.push(allComments[i]);
                             y = false;
                         }
                     }
@@ -95,17 +73,17 @@ function News() {
                                 .then((allLikes) => {
 
 
-                                    fetch("http://localhost:3001/news/users", myInit)
+                                    fetch("http://localhost:3001/users/all", myInit)
                                         .then(response => response.json())
                                         .then((allUsers) => {
 
-                                            let nouveauTableau = [];
+                                            let publicationsArrayDataV2 = [];
                                             let t = false;
 
                                             for (let i = 0; i < allPublications.length; i++) {
-                                                for (let o = 0; o < tableau.length; o++) {
-                                                    if (allPublications[i].id === tableau[o].publications_idpublications) {
-                                                        nouveauTableau.push(tableau[o]);
+                                                for (let o = 0; o < publicationsArrayDataV1.length; o++) {
+                                                    if (allPublications[i].id === publicationsArrayDataV1[o].publications_idpublications) {
+                                                        publicationsArrayDataV2.push(publicationsArrayDataV1[o]);
                                                         t = true;
                                                         break;
                                                     } else {
@@ -114,7 +92,7 @@ function News() {
 
                                                 }
                                                 if (t !== true) {
-                                                    nouveauTableau.push(allPublications[i]);
+                                                    publicationsArrayDataV2.push(allPublications[i]);
                                                     t = false;
                                                 }
 
@@ -122,11 +100,11 @@ function News() {
 
 
 
-                                            for (let i = 0; i < nouveauTableau.length; i++) {
-                                                nouveauTableau[i].createdAtNumber = nouveauTableau[i].createdAt.replace(/\D/g, '');
+                                            for (let i = 0; i < publicationsArrayDataV2.length; i++) {
+                                                publicationsArrayDataV2[i].createdAtNumber = publicationsArrayDataV2[i].createdAt.replace(/\D/g, '');
                                             }
 
-                                            const tttest = nouveauTableau.sort(function compare(a, b) {
+                                            const modifyPublicationsArrayDataV2 = publicationsArrayDataV2.sort(function compare(a, b) {
                                                 if (a.createdAtNumber < b.createdAtNumber)
                                                     return 1;
                                                 if (a.createdAtNumber > b.createdAtNumber)
@@ -135,68 +113,67 @@ function News() {
                                             });
 
                                             // J'ai rajouté une partie "createdAtNumber"
-                                            // Ensuite, je dois utiliser "estCerise" pour trouver les publications correspondant aux commentaires.
 
-                                            let newArray2 = [];
+                                            let publicationsArrayDataV3 = [];
 
-                                            for (let i = 0; i < tttest.length; i++) {
+                                            for (let i = 0; i < modifyPublicationsArrayDataV2.length; i++) {
 
 
                                                 // Remplacer les commentaires par les publications liées dans le tableau
-                                                if (tttest[i].publications_idpublications) {
-                                                    function findPublication(publicationTestttt) {
-                                                        return publicationTestttt.id === tttest[i].publications_idpublications
+                                                if (modifyPublicationsArrayDataV2[i].publications_idpublications) {
+                                                    function findPublication(publicationFind) {
+                                                        return publicationFind.id === modifyPublicationsArrayDataV2[i].publications_idpublications
                                                     }
-                                                    newArray2.push(allPublications.find(findPublication))
+                                                    publicationsArrayDataV3.push(allPublications.find(findPublication))
                                                     // Je push les publications liées au commentaire à la place du commentaire pour n'avoir que des publications dans un nouveau tableau
                                                 } else {
-                                                    newArray2.push(tttest[i]) // Je push les publications aussi pour avoir toutes les publications
+                                                    publicationsArrayDataV3.push(modifyPublicationsArrayDataV2[i]) // Je push les publications aussi pour avoir toutes les publications
                                                 }
                                             }
 
                                             const allCommentsReversed = allComments.reverse();
 
-                                            for (let i = 0; i < newArray2.length; i++) {
+                                            for (let i = 0; i < publicationsArrayDataV3.length; i++) {
                                                 for (let o = 0; o < allCommentsReversed.length; o++) {
-                                                    if (newArray2[i].id === allCommentsReversed[o].publications_idpublications && newArray2[i].comments === undefined) {
-                                                        Object.defineProperty(newArray2[i], 'comments', {
+                                                    if (publicationsArrayDataV3[i].id === allCommentsReversed[o].publications_idpublications && publicationsArrayDataV3[i].comments === undefined) {
+                                                        Object.defineProperty(publicationsArrayDataV3[i], 'comments', {
                                                             value: [allCommentsReversed[o]],
                                                             configurable: true,
                                                             enumerable: true
                                                         });
 
-                                                    } else if (newArray2[i].id === allCommentsReversed[o].publications_idpublications) {
-                                                        newArray2[i].comments.push(allCommentsReversed[o])
+                                                    } else if (publicationsArrayDataV3[i].id === allCommentsReversed[o].publications_idpublications) {
+                                                        publicationsArrayDataV3[i].comments.push(allCommentsReversed[o])
                                                     }
                                                 }
                                             }
 
-                                            for (let i = 0; i < newArray2.length; i++) {
+                                            for (let i = 0; i < publicationsArrayDataV3.length; i++) {
                                                 for (let o = 0; o < allLikes.length; o++) {
-                                                    if (newArray2[i].id === allLikes[o].publications_idpublications && newArray2[i].likes === undefined) {
-                                                        Object.defineProperty(newArray2[i], 'likes', {
+                                                    if (publicationsArrayDataV3[i].id === allLikes[o].publications_idpublications && publicationsArrayDataV3[i].likes === undefined) {
+                                                        Object.defineProperty(publicationsArrayDataV3[i], 'likes', {
                                                             value: [allLikes[o]],
                                                             configurable: true,
                                                             enumerable: true
                                                         });
-                                                    } else if (newArray2[i].id === allLikes[o].publications_idpublications) {
-                                                        newArray2[i].likes.push(allLikes[o])
+                                                    } else if (publicationsArrayDataV3[i].id === allLikes[o].publications_idpublications) {
+                                                        publicationsArrayDataV3[i].likes.push(allLikes[o])
                                                     }
                                                 }
                                             }
 
 
                                             // Je passe sur toutes les publications pour leur ajouter le prénom et le nom du user
-                                            for (let i = 0; i < newArray2.length; i++) {
+                                            for (let i = 0; i < publicationsArrayDataV3.length; i++) {
 
 
                                                 // Remplacer les commentaires par les publications liées dans le tableau
-                                                function findUser(userTestttt) {
-                                                    return userTestttt.id === newArray2[i].users_idusers
+                                                function findUser(userPublicationFind) {
+                                                    return userPublicationFind.id === publicationsArrayDataV3[i].users_idusers
                                                 }
                                                 let userFinded = allUsers.find(findUser);
-                                                // for (let o = 0; o < newArray2.length; o++) { Je crois que cette boucle ne sert à rien
-                                                Object.defineProperty(newArray2[i], 'user', {
+                                                // for (let o = 0; o < publicationsArrayDataV3.length; o++) { Je crois que cette boucle ne sert à rien
+                                                Object.defineProperty(publicationsArrayDataV3[i], 'user', {
                                                     value: userFinded,
                                                     configurable: true,
                                                     enumerable: true
@@ -204,13 +181,13 @@ function News() {
 
 
 
-                                                if (newArray2[i].comments) {
-                                                    for (let o = 0; o < newArray2[i].comments.length; o++) {
-                                                        function findUserForComment(userTesttttForComment) {
-                                                            return userTesttttForComment.id === newArray2[i].comments[o].users_idusers
+                                                if (publicationsArrayDataV3[i].comments) {
+                                                    for (let o = 0; o < publicationsArrayDataV3[i].comments.length; o++) {
+                                                        function findUserForComment(userCommentFind) {
+                                                            return userCommentFind.id === publicationsArrayDataV3[i].comments[o].users_idusers
                                                         }
                                                         let userForCommentFinded = allUsers.find(findUserForComment)
-                                                        Object.defineProperty(newArray2[i].comments[o], 'user', {
+                                                        Object.defineProperty(publicationsArrayDataV3[i].comments[o], 'user', {
                                                             value: userForCommentFinded,
                                                             configurable: true,
                                                             enumerable: true
@@ -220,15 +197,14 @@ function News() {
                                                 // }
                                             }
                                             
-                                            if (commentState[0] === undefined && newArray2[0]) {
-                                                setCommentState(newArray2)
-                                                console.log(newArray2)
+                                            if (publicationsData[0] === undefined && publicationsArrayDataV3[0]) {
+                                                setPublicationsData(publicationsArrayDataV3)
+                                                console.log(publicationsArrayDataV3)
                                             }
                                             
 
 
 
-                                            // Fin de test de faire différement
 
 
 
@@ -244,17 +220,16 @@ function News() {
         }
         catch (err) { console.log(err) }
     }
-    }, [commentState, getToken])
+    }, [publicationsData, getToken])
 
-    // Fin test grand tableau
-
+    console.log(publicationsData)
 
     return (
         <>
             <PublicationInput />
-            <ol>{(commentState[0] !== undefined) &&
-                commentState.map((commentState) => {
-                    return <Feed isAdmin={isAdmin} commentState={commentState} key={commentState.id} />
+            <ol>{(publicationsData[0] !== undefined) &&
+                publicationsData.map((publicationsData) => {
+                    return <Feed isAdmin={isAdmin} publicationsData={publicationsData} key={publicationsData.id} />
                 })
             }
             </ol>

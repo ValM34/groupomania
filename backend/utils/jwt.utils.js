@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 
-const JWT_SIGN_SECRET = 's7UcdjHZk33fiuMhH5in4Tu27BYhz6RCKFZCY82tU858bw_KA5QxDPvyi6xYdU7x7eF4z356223MPuwMe6YZSy5hz87x5N4R5BK9XS9z6up3MG_zxVB42TF748S3VmH2tMd6y67nQq5t6j8qhy9h6T3XG';
+const JWT_SIGN_SECRET = process.env.TOKEN_KEY;
 
 // Exported functions
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     },
     JWT_SIGN_SECRET,
     {
-      expiresIn: '1000h'
+      expiresIn: '720h'
     })
   },
   parseAuthorization: function(authorization) {

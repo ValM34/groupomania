@@ -8,7 +8,7 @@ const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
     const [updateComment, setUpdateComment] = useState(false);
 
 
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+    let getToken = JSON.parse(localStorage.getItem('userData'));
 
     const deleteComment = (evt) => {
         evt.preventDefault();

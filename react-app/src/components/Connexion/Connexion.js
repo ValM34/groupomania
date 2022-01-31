@@ -37,7 +37,7 @@ function Connexion(props) {
                     console.log(infosSignin);
                     let commandeLocalStorage = [];
                     commandeLocalStorage.push(infosSignin);
-                    localStorage.setItem("commandSignin", JSON.stringify(commandeLocalStorage));
+                    localStorage.setItem("userData", JSON.stringify(commandeLocalStorage));
                     window.location.reload(false);
                 })
         }

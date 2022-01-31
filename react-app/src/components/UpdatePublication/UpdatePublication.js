@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
-function UpdatePublication({ commentState }) {
+function UpdatePublication({ publicationsData }) {
 
 
     const [contentUpdatePublication, setContentUpdatePublication] = useState('');
@@ -12,7 +12,7 @@ function UpdatePublication({ commentState }) {
     const formUpdatePublicationRef = useRef(null);
 
 
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+    let getToken = JSON.parse(localStorage.getItem('userData'));
 
     const onChangeContentUpdatePublication = (evt) => {
         setContentUpdatePublication(evt.target.value)
@@ -21,7 +21,7 @@ function UpdatePublication({ commentState }) {
         evt.preventDefault();
         console.log(new FormData(formUpdatePublicationRef.current.file))
         let formData = new FormData(formUpdatePublicationRef.current);
-        formData.append('id', commentState.id);
+        formData.append('id', publicationsData.id);
         fetch("http://localhost:3001/news/publications/update", {
             method: "POST",
             mode: "cors",
@@ -35,7 +35,7 @@ function UpdatePublication({ commentState }) {
         <div className="containerFlexbox">
 
             <form className="containerUpdatePublication" ref={formUpdatePublicationRef} onSubmit={buttonUpdatePublication}>
-                <textarea className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={commentState.content}></textarea>
+                <textarea className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={publicationsData.content}></textarea>
                 <label className="labelUpdateImage" htmlFor="imageUpdate"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter ou modifier une image</label>
                 <input className="inputFile" id="imageUpdate" type="file" name="image" />
                 <button className="buttonUpdatePublication" type="submit">Modifier</button>

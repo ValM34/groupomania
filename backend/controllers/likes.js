@@ -35,20 +35,3 @@ exports.getLikes = async (req, res, next) => {
 
 
 };
-
-/*
-exports.deleteLike = async (req, res, next) => {
-    console.log(req.params.id)
-    console.log(req.auth.users_idusers)
-    const getOneLike = await models.Like.findOne({
-        where: { publications_idpublications: req.params.id, users_idusers: req.auth.users_idusers }
-    })
-    if (!getOneLike) {
-        return res.send(" ERROR ");
-    }
-    const deleteLike = await models.Like.destroy({
-        where: { publications_idpublications: req.params.id, users_idusers: req.auth.users_idusers }
-    });
-    return res.send("LIKE_DELETED");
-};
-*/

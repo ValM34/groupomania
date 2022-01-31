@@ -20,7 +20,7 @@ function PublicationInput() {
         console.log(new FormData(formRef.current))
         // Récupération du token pour l'envoyer au backend
 
-        let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+        let getToken = JSON.parse(localStorage.getItem('userData'));
         console.log(getToken[0].token)
 
         let myHeaders = new Headers({ 'Authorization': getToken[0].token });

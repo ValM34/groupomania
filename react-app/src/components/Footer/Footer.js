@@ -1,7 +1,7 @@
 
 function Footer ({ isNotLogged }) {
 
-    let getToken = JSON.parse(localStorage.getItem('commandSignin'));
+    let getToken = JSON.parse(localStorage.getItem('userData'));
 
     const deleteUser = () => {
         fetch("http://localhost:3001/users/delete", {

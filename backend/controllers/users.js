@@ -115,6 +115,15 @@ exports.signinUser = async (req, res) => {
 
 }
 
+exports.getAllUsers = async (req, res, next) => {
+
+  const allUsers = await models.User.findAll({ attributes: ['id', 'name', 'surname'] })
+      .then(users => { res.status(200).json(users) })
+      .catch(error => res.status(400).json({ error: "ERROR" }))
+
+
+};
+
 exports.isLoggedIn = async (req, res, next) => {
 
 
