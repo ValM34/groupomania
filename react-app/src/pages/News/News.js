@@ -72,6 +72,8 @@ function News() {
                             i++;
                         }
                         for (let o = 0; o < tableau.length; o++) {
+                            console.log(tableau.length);
+                            if (tableau.length === 1){y = true; break;}
                             if (allComments[i].publications_idpublications === tableau[o].publications_idpublications) {
                                 y = true;
                                 break;
@@ -217,12 +219,12 @@ function News() {
                                                 }
                                                 // }
                                             }
-
-                                            if (commentState[0] === undefined) {
+                                            
+                                            if (commentState[0] === undefined && newArray2[0]) {
                                                 setCommentState(newArray2)
                                                 console.log(newArray2)
                                             }
-
+                                            
 
 
 
