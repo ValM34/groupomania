@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require("helmet");
 const createError = require('http-errors');
+require('dotenv').config()
 const models = require('./models');
 const jwt = require('jsonwebtoken');
 const app = express();
