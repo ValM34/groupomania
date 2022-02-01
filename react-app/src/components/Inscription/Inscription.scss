@@ -29,13 +29,15 @@ input:focus {
 .buttonSwitchSignin {
     background-color: $color-secondary;
     border: none;
-    font-size: 24px;
-    font-weight: bold;
-    color: $color-primary;
     border-top-right-radius: 30px;
     transition: background-color 250ms ease-in-out;
     width: 50%;
     padding: 10px;
+}
+.h2Connexion {
+    font-size: 24px;
+    font-weight: bold;
+    color: $color-primary;
 }
 .buttonSwitchSignin:hover {
     cursor: pointer;
@@ -62,7 +64,7 @@ input:focus {
 }
 
 .buttonSignup:focus {
-    outline: white solid 2px;
+    outline: black solid 2px;
 }
 
 .containerSignup {
@@ -71,7 +73,7 @@ input:focus {
     background-color: $color-primary;
     box-shadow: 0px 0px 5px $color-primary;
     border-radius: 30px;
-    color: white;
+    color: black;
     width: 340px;
     @include mobile {
         width: 100%;

@@ -5,7 +5,6 @@ import {useState} from 'react';
 
 function Home() {
 
-    // console.log(useState(10))
   
     const [monState, setMonState] = useState(true)
   
@@ -18,6 +17,7 @@ function Home() {
     }
     return (
       <div>
+        <h1>Réseau social de Groupomania</h1>
         <section>
          {monState ? <Inscription func={modifyState} /> : <Connexion func={modifyState} />}
         </section>

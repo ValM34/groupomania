@@ -38,12 +38,12 @@
     background-color: lighten($color-secondary, 10);
 }
 .labelUpdateImage {
-    color: $color-secondary;
+    color: black;
     font-size: 20px;
     transition: color 250ms ease-in-out;
     margin-top: 10px;
 }
 .labelUpdateImage:hover {
     cursor: pointer;
-    color: $color-tertiary;
+    color: $color-secondary;
 }

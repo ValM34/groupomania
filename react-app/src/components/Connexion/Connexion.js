@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 function Connexion(props) {
 
-    const [errorState, setErrorState] = useState(false);
+    const [errorConnexion, setErrorConnexion] = useState(false);
 
     const refEmail = useRef(null);
     const refPassword = useRef(null);
@@ -20,7 +20,7 @@ function Connexion(props) {
         }
 
         if (!EMAIL_REGEX.test(userInfos.email) || !PASSWORD_REGEX.test(userInfos.password)) {
-            setErrorState(true);
+            setErrorConnexion(true);
         } else {
             fetch(refForm.current.action, {
                 method: refForm.current.method,
@@ -30,15 +30,22 @@ function Connexion(props) {
                 .then(response => response.json())
                 .then((infosUser) => {
                     console.log(infosUser);
-                    let infosSignin = {
-                        userId: infosUser.userId,
-                        token: infosUser.token
+                    
+                    if(infosUser.userId){
+                        let infosSignin = {
+                            userId: infosUser.userId,
+                            token: infosUser.token
+                        }
+                        console.log(infosSignin);
+                        let userLocalStorage = [];
+                        userLocalStorage.push(infosSignin);
+                        localStorage.setItem("userData", JSON.stringify(userLocalStorage));
+                        console.log(infosUser)
+                        window.location.reload(false);
+                    } else {
+                        setErrorConnexion(true);
                     }
-                    console.log(infosSignin);
-                    let commandeLocalStorage = [];
-                    commandeLocalStorage.push(infosSignin);
-                    localStorage.setItem("userData", JSON.stringify(commandeLocalStorage));
-                    window.location.reload(false);
+                    
                 })
         }
     }
@@ -55,12 +62,12 @@ function Connexion(props) {
             <form className="formIndex" method="POST" action="http://localhost:3001/users/signin" ref={refForm} onSubmit={onSubmit}>
                 <div className="containerSignin">
                     <div className="divSwitchSignup">
-                        <button onClick={() => props.func()} className="buttonSwitchSignup" type="button" id="buttonSwitch">Inscription</button>
-                        <div className="ongletSwitchSignup">Connexion</div>
+                        <button onClick={() => props.func()} className="buttonSwitchSignup" type="button" id="buttonSwitch"><h2 className="h2Inscription">Inscription</h2></button>
+                        <h2 className="ongletSwitchSignup">Connexion</h2>
                     </div>
                     <label className="labelHome" htmlFor="email">Adresse email :</label><input ref={refEmail} required type="email" name="email" id="email" placeholder="adresse email" maxLength="255" />
                     <label className="labelHome" htmlFor="password">Mot de passe :</label><input ref={refPassword} required type="password" name="password" id="password" placeholder="mot de passe" maxLength="255" />
-                    {errorState ? <div>Veuillez renseigner tous les champs. Le mot de passe doit contenir au moins 8 caractères dont 1 lettre minuscule, 1 lettre majuscule et 1 chiffre.</div> : ''}
+                    {errorConnexion ? <div>Un des deux champs est mal renseigné.</div> : ""}
                     <button className="buttonSignup" type="submit" id="buttonEvent">Connexion</button>
                 </div>
 

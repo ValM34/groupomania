@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { faMinusCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
+const ButtonsDeleteAndUpdateComment = ({ idComment, contentComment, isAdmin }) => {
 
     const [contentUpdateComment, setContentUpdateComment] = useState('');
     const [updateComment, setUpdateComment] = useState(false);
-
 
     let getToken = JSON.parse(localStorage.getItem('userData'));
 
@@ -23,7 +22,11 @@ const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
                 'Authorization': getToken[0].token
             }
         })
-        window.location.reload(false);
+        .then((response) => {
+            if(response.ok){
+                window.location.reload(false);
+            }
+        })
     }
 
     const displayUpdateComment = (evt) => {
@@ -44,6 +47,11 @@ const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
                 'Authorization': getToken[0].token
             }
         })
+            .then((response) => {
+                if(response.ok){
+                    window.location.reload(false);
+                }
+            })
     }
     const onChangeContentUpdateComment = (evt) => {
         setContentUpdateComment(evt.target.value)
@@ -53,15 +61,17 @@ const ButtonDeleteComment = ({ idComment, contentComment, isAdmin }) => {
     return (
         <>
             <div className="containerButtonsComments">
-                {isAdmin ? <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button> : <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} /></button>}
-                {isAdmin ? <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : <button className="buttonDeleteComment" onClick={deleteComment}><FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button>}
+                {isAdmin ? <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} />Modifier</button> : <button className="buttonUpdateComment" onClick={displayUpdateComment}><FontAwesomeIcon className="faEdit" icon={faEdit} />Modifier</button>}
+                {isAdmin ? <button className="buttonDeleteComment" onClick={deleteComment}>Supprimer <FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button> : <button className="buttonDeleteComment" onClick={deleteComment}>Supprimer <FontAwesomeIcon className="faMinusCircle" icon={faMinusCircle} /></button>}
             </div>
             <div>{updateComment ?
-                <><textarea className="textareaUpdateComment" type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
+                <>
+                <label htmlFor="textareaModifyComment">Modifier le commentaire</label>
+                <textarea id="textareaModifyComment" className="textareaUpdateComment" type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
                     <button className="buttonUpdateCommentSubmit" type="button" onClick={buttonUpdateComment}>Modifier</button></>
                 : ""}</div>
         </>
     );
 }
 
-export default ButtonDeleteComment;
+export default ButtonsDeleteAndUpdateComment;

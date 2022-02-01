@@ -72,6 +72,10 @@
 .likeButton {
     background-color: transparent;
     border: none;
+    padding-right: 5px;
+}
+.likeButton:hover {
+    cursor: pointer;
 }
 .faThumbsUp {
     color: $color-tertiary;
@@ -112,6 +116,17 @@
 .buttonDeletePublication:hover {
     cursor: pointer;
     color: red;
+}
+.iconUpdatePublication {
+    background-color: transparent;
+    border: none;
+    margin: 0px;
+    transition: color 250ms ease-in-out;
+    margin-right: 10px;
+}
+.iconUpdatePublication:hover {
+    cursor: pointer;
+    color: $color-secondary;
 }
 .faMinusCircle {
     font-size: 18px;

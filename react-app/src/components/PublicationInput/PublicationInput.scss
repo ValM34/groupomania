@@ -56,19 +56,19 @@
 }
 
 .buttonAddPublication:focus {
-    outline: white solid 2px;
+    outline: black solid 2px;
 }
 .inputFile {
     display: none;
 }
 .labelUploadImage {
-    color: $color-secondary;
+    color: $color-tertiary;
     font-size: 20px;
     transition: color 250ms ease-in-out;
 }
 .labelUploadImage:hover {
     cursor: pointer;
-    color: $color-tertiary;
+    color: $color-secondary;
 }
 .faImage {
     

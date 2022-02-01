@@ -6,8 +6,8 @@ footer {
     padding: 10px 50px;
 }
 .buttonDeleteAccount {
-    background-color: black;
-    color: $color-tertiary;
+    background-color: #9E0000;
+    color: white;
     font-size: 20px;
     border: none;
     box-shadow: 2px 2px 2px black;
@@ -20,8 +20,8 @@ footer {
     background-color: red;
 }
 .buttonLogout {
-    background-color: black;
-    color: $color-tertiary;
+    background-color: $color-secondary;
+    color: white;
     font-size: 20px;
     border: none;
     box-shadow: 2px 2px 2px black;

@@ -42,7 +42,6 @@ function News() {
 
                 .then((allComments) => {
 
-                    console.log(allComments)
                     let y = false;
                     for (let i = 0; i < allComments.length; i++) {
                         if (publicationsArrayDataV1.length === 0) {
@@ -50,7 +49,6 @@ function News() {
                             i++;
                         }
                         for (let o = 0; o < publicationsArrayDataV1.length; o++) {
-                            console.log(publicationsArrayDataV1.length);
                             if (publicationsArrayDataV1.length === 1){y = true; break;}
                             if (allComments[i].publications_idpublications === publicationsArrayDataV1[o].publications_idpublications) {
                                 y = true;
@@ -199,7 +197,6 @@ function News() {
                                             
                                             if (publicationsData[0] === undefined && publicationsArrayDataV3[0]) {
                                                 setPublicationsData(publicationsArrayDataV3)
-                                                console.log(publicationsArrayDataV3)
                                             }
                                             
 
@@ -222,11 +219,12 @@ function News() {
     }
     }, [publicationsData, getToken])
 
-    console.log(publicationsData)
 
     return (
         <>
+            <h1>Fil d'actualités</h1>
             <PublicationInput />
+            <h2>Publications récentes</h2>
             <ol>{(publicationsData[0] !== undefined) &&
                 publicationsData.map((publicationsData) => {
                     return <Feed isAdmin={isAdmin} publicationsData={publicationsData} key={publicationsData.id} />

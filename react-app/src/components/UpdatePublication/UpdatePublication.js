@@ -30,12 +30,18 @@ function UpdatePublication({ publicationsData }) {
                 'Authorization': getToken[0].token
             })
         })
+        .then((response) => {
+            if(response.ok){
+                window.location.reload(false);
+            }
+        })
     }
     return (
         <div className="containerFlexbox">
 
             <form className="containerUpdatePublication" ref={formUpdatePublicationRef} onSubmit={buttonUpdatePublication}>
-                <textarea className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={publicationsData.content}></textarea>
+                <label htmlFor="contentUpdatePublication">Modifier la publication</label>
+                <textarea id="contentUpdatePublication" className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={publicationsData.content}></textarea>
                 <label className="labelUpdateImage" htmlFor="imageUpdate"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter ou modifier une image</label>
                 <input className="inputFile" id="imageUpdate" type="file" name="image" />
                 <button className="buttonUpdatePublication" type="submit">Modifier</button>

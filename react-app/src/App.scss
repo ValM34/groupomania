@@ -1,7 +1,7 @@
 // --------------- VARIABLES --------------
-$color-primary: #2b73b3;
-$color-secondary: #FEBB00;
-$color-tertiary: white;
+$color-primary: #DFDFDF;
+$color-secondary: #1353FF;
+$color-tertiary: black;
 
 // ------------------ MIXINS-RESPONSIVE ------------
 @mixin desktop {
@@ -27,7 +27,7 @@ $color-tertiary: white;
 @import './components/Header/Header.scss';
 @import './components/Connexion/Connexion.scss';
 @import './components/Comment/Comment.scss';
-@import './components/ButtonDeleteAndUpdateComment/ButtonDeleteAndUpdateComment.scss';
+@import './components/ButtonsDeleteAndUpdateComment/ButtonsDeleteAndUpdateComment.scss';
 @import './components/UpdatePublication/UpdatePublication.scss';
 @import './components/Footer/Footer.scss';
 
@@ -42,5 +42,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $color-tertiary;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+h3, h4 {
+  font-weight:normal;
+}
+button {
+  font-size: 18px;
 }

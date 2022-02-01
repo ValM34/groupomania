@@ -49,8 +49,8 @@ function Inscription(props) {
 
                 <div className="containerSignup">
                     <div className="divSwitchSignin">
-                        <button onClick={() => props.func()} className="buttonSwitchSignin" type="button" id="buttonSwitch">Connexion</button>
-                        <div className="ongletSwitchSignin">Inscription</div>
+                        <button onClick={() => props.func()} className="buttonSwitchSignin" type="button" id="buttonSwitch"><h2 className="h2Connexion">Connexion</h2></button>
+                        <h2 className="ongletSwitchSignin">Inscription</h2>
                     </div>
                     <label className="labelHome" htmlFor="surname">Nom :</label><input ref={refSurname} required type="text" name="surname" id="surname" placeholder="nom" maxLength="255" />
                     <label className="labelHome" htmlFor="name">Prénom :</label><input ref={refName} required type="text" name="name" id="name" placeholder="prénom" maxLength="255" />
