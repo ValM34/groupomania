@@ -12,7 +12,7 @@ const Feed = ({ publicationsData, isAdmin }) => {
 
     const [content, setContent] = useState('');
     const [updatePublication, setUpdatePublication] = useState(false);
-    const formRef2 = useRef(null);
+    const formCommentRef = useRef(null);
     const likeRef = useRef(null);
 
 
@@ -56,8 +56,8 @@ const Feed = ({ publicationsData, isAdmin }) => {
         if (!content || !publicationsData.id || !getToken) {
             return
         }
-        fetch(formRef2.current.action, {
-            method: formRef2.current.method,
+        fetch(formCommentRef.current.action, {
+            method: formCommentRef.current.method,
             body: `content=${content}&publications_idpublications=${publicationsData.id}&users_idusers=${JSON.stringify(getToken[0].userId)}`,
             headers: {
                 'Accept': 'application/json',
@@ -65,8 +65,11 @@ const Feed = ({ publicationsData, isAdmin }) => {
                 'Authorization': getToken[0].token
             },
         })
-        window.location.reload(false);
-
+        .then((response) => {
+            if(response.ok){
+                window.location.reload(false);
+            }
+        })
     }
 
     const deletePublication = (evt) => {
@@ -125,7 +128,7 @@ const Feed = ({ publicationsData, isAdmin }) => {
                             {publicationsData.likes ? <Likes likesNumber={publicationsData.likes.length} /> : "0"}
                         </div>
                     </div>
-                    <form className={publicationsData.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formRef2} onSubmit={onSubmitComment}>
+                    <form className={publicationsData.id} method="POST" action="http://localhost:3001/news/comments/add" ref={formCommentRef} onSubmit={onSubmitComment}>
                         <label htmlFor={publicationsData.id}><h3>Commenter</h3></label>
                         <textarea className="textareaCreateComment" id={publicationsData.id} type="text" name="content" onChange={onChangeContent} value={content} placeholder="Commenter..." />
                         <button className="buttonComment" type="submit">Envoyer</button>
