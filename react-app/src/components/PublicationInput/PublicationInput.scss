@@ -59,7 +59,14 @@
     outline: black solid 2px;
 }
 .inputFile {
-    display: none;
+    margin: 0;
+    width: 270px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    @include mobile {
+        width: 130px;
+    }
 }
 .labelUploadImage {
     color: $color-tertiary;

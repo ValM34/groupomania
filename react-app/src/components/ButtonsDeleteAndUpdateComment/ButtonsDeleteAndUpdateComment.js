@@ -66,8 +66,8 @@ const ButtonsDeleteAndUpdateComment = ({ idComment, contentComment, isAdmin }) =
             </div>
             <div>{updateComment ?
                 <>
-                <label htmlFor="textareaModifyComment">Modifier le commentaire</label>
-                <textarea id="textareaModifyComment" className="textareaUpdateComment" type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
+                <label htmlFor={"textareaModifyComment" + idComment}>Modifier le commentaire</label>
+                <textarea id={"textareaModifyComment" + idComment} className="textareaUpdateComment" type="text" name="contentUpdatePublication" onChange={onChangeContentUpdateComment} value={contentUpdateComment} placeholder={contentComment}></textarea>
                     <button className="buttonUpdateCommentSubmit" type="button" onClick={buttonUpdateComment}>Modifier</button></>
                 : ""}</div>
         </>

@@ -36,7 +36,6 @@ function Connexion(props) {
                             userId: infosUser.userId,
                             token: infosUser.token
                         }
-                        console.log(infosSignin);
                         let userLocalStorage = [];
                         userLocalStorage.push(infosSignin);
                         localStorage.setItem("userData", JSON.stringify(userLocalStorage));

@@ -97,7 +97,7 @@ const Feed = ({ publicationsData, isAdmin }) => {
 
     return (
         <div className="cardContainer">
-            <ol>
+            
                 <li className="liPublication" key={publicationsData.id}>
 
 
@@ -136,7 +136,7 @@ const Feed = ({ publicationsData, isAdmin }) => {
 
 
                 </li>
-            </ol>
+            
         </div>
     );
 }

@@ -40,10 +40,10 @@ function UpdatePublication({ publicationsData }) {
         <div className="containerFlexbox">
 
             <form className="containerUpdatePublication" ref={formUpdatePublicationRef} onSubmit={buttonUpdatePublication}>
-                <label htmlFor="contentUpdatePublication">Modifier la publication</label>
-                <textarea id="contentUpdatePublication" className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={publicationsData.content}></textarea>
-                <label className="labelUpdateImage" htmlFor="imageUpdate"><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter ou modifier une image</label>
-                <input className="inputFile" id="imageUpdate" type="file" name="image" />
+                <label htmlFor={"contentUpdatePublication-" + publicationsData.id}>Modifier la publication</label>
+                <textarea id={"contentUpdatePublication-" + publicationsData.id} className="textareaUpdatePublication" type="text" name="content" onChange={onChangeContentUpdatePublication} value={contentUpdatePublication} placeholder={publicationsData.content}></textarea>
+                <label className="labelUpdateImage" htmlFor={"imageUpdate-" + publicationsData.id}><FontAwesomeIcon className="faImage" icon={faImage} />Ajouter ou modifier une image</label>
+                <input className="inputFile" id={"imageUpdate-" + publicationsData.id} type="file" name="image" />
                 <button className="buttonUpdatePublication" type="submit">Modifier</button>
             </form>
 
